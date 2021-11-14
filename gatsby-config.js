@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://www.stereotyper.io",
     title: "Stereotyper",
   },
-  plugins: [],
+  plugins: [`gatsby-plugin-styled-components`],
 };
