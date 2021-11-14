@@ -5,7 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.font};
-    transition: all 0.50s linear;
+    transition: all 0.35s linear;
   }
 
   button {
@@ -18,7 +18,6 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
     background-color: #1064EA;
     color: #FFFFFF;
-    font-family: ${({ theme }) => theme.font};
   }
 
   button.btn {

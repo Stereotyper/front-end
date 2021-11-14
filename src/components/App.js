@@ -10,8 +10,6 @@ const Header = styled.div`
   font-family: "Nixie One", cursive;
   font-size: 48px;
   padding-bottom: 20px;
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
 `;
 
 export const App = () => {
@@ -23,7 +21,7 @@ export const App = () => {
   }, [themeLoaded]);
 
   return (
-    <>
+    <div>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles />
@@ -34,6 +32,6 @@ export const App = () => {
           </div>
         </ThemeProvider>
       )}
-    </>
+    </div>
   );
 };

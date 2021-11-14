@@ -5,7 +5,6 @@ export const saveToLocalStorage = (key, value) => {
 };
 
 export const getFromLocalStorage = (key) => {
-  const value = null;
   if (isBrowser) {
     const value = window.localStorage.getItem(key);
 
