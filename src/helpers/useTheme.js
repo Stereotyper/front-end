@@ -9,6 +9,7 @@ export const useTheme = () => {
   const [themeLoaded, setThemeLoaded] = useState(false);
 
   const saveMode = (mode) => {
+    // console.log(mode);
     saveToLocalStorage("theme", mode);
     setTheme(mode);
   };

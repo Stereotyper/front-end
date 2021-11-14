@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../helpers/globalStyle";
+import styled from "styled-components";
 import { useTheme } from "../helpers/useTheme";
+import { ThemeButton } from "./themeButton";
 
-export const ThemeControl = () => {
-  const { theme, themeLoaded, mappableThemes, themes } = useTheme();
-  const [selectedTheme, setSelectedTheme] = useState(theme);
+const ThemeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
-  console.log(themes.data);
-
-  useEffect(() => {
-    setSelectedTheme(theme);
-  }, [themeLoaded]);
+export const ThemeControl = ({ changeTheme }) => {
+  const { themes } = useTheme();
 
   return (
-    <div>
-      {themeLoaded && (
-        <ThemeProvider theme={selectedTheme}>
-          <GlobalStyles />
-          {Object.keys(themes.data).map((theme) => (
-            <div>{theme}</div>
-          ))}
-        </ThemeProvider>
-      )}
-    </div>
+    <ThemeContainer>
+      {Object.keys(themes.data).map((theme) => (
+        <ThemeButton
+          changeTheme={changeTheme}
+          theme={themes.data[theme]}
+          key={themes.data[theme].name}
+        />
+      ))}
+    </ThemeContainer>
   );
 };

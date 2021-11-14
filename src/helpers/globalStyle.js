@@ -8,11 +8,6 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
   }
 
-  a {
-    color: ${({ theme }) => theme.colors.link.text};
-    cursor: pointer;
-  }
-
   button {
     border: 0;
     display: inline-block;

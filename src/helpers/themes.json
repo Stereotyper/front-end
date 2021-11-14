@@ -1,34 +1,46 @@
 {
   "data": {
     "light": {
-      "id": "T_001",
       "name": "Light",
       "colors": {
-        "body": "#FFFFFF",
-        "text": "#000000",
+        "body": "#FAFAFA",
+        "text": "#1a1a1a",
         "button": {
-          "text": "#FFFFFF",
-          "background": "#000000"
-        },
-        "link": {
-          "text": "teal",
-          "opacity": 1
+          "text": "#1a1a1a",
+          "background": "#EAEAEA"
         }
       }
     },
-    "seaWave": {
-      "id": "T_007",
-      "name": "Sea Wave",
+    "monokai": {
+      "name": "Monokai",
       "colors": {
-        "body": "#9be7ff",
-        "text": "#0d47a1",
+        "body": "#171812",
+        "text": "#95CA2A",
         "button": {
-          "text": "#ffffff",
-          "background": "#0d47a1"
-        },
-        "link": {
-          "text": "#0d47a1",
-          "opacity": 0.8
+          "text": "#CCCCC6",
+          "background": "#272822"
+        }
+      }
+    },
+    "nord": {
+      "name": "Nord",
+      "colors": {
+        "body": "#242933",
+        "text": "#eceff4",
+        "button": {
+          "text": "#eceff4",
+          "background": "#2e3440"
+        }
+      }
+    },
+    "kobayashi": {
+      "name": "Kobayashi",
+      "colors": {
+        "body": "#9a876a",
+        "text": "#d79e27",
+        "button": {
+          "text": "#f00d00",
+          "background": "#fefef5"
         }
       }
     }
