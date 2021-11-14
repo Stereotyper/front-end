@@ -5,6 +5,15 @@ import { useTheme } from "../helpers/useTheme";
 
 import { ThemeControl } from "./themeControl";
 
+const Header = styled.div`
+  text-align: center;
+  font-family: "Nixie One", cursive;
+  font-size: 48px;
+  padding-bottom: 20px;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+`;
+
 export const App = () => {
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
@@ -19,7 +28,7 @@ export const App = () => {
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles />
           <div>
-            <h1>StereoTyper</h1>
+            <Header>StereoTyper.io</Header>
 
             <ThemeControl changeTheme={setSelectedTheme} />
           </div>
