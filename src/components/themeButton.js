@@ -20,10 +20,10 @@ const Button = styled.div`
 `;
 
 export const ThemeButton = ({ changeTheme, theme }) => {
-  const { saveMode } = useTheme();
+  const { saveTheme } = useTheme();
 
   const themeSwitcher = (selectedTheme) => {
-    saveMode(selectedTheme);
+    saveTheme(selectedTheme);
     changeTheme(selectedTheme);
   };
 

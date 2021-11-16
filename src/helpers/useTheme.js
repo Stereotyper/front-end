@@ -8,7 +8,7 @@ export const useTheme = () => {
 
   const [themeLoaded, setThemeLoaded] = useState(false);
 
-  const saveMode = (mode) => {
+  const saveTheme = (mode) => {
     saveToLocalStorage("theme", mode);
     setTheme(mode);
   };
@@ -22,5 +22,5 @@ export const useTheme = () => {
     setThemeLoaded(true);
   }, []);
 
-  return { theme, themeLoaded, saveMode, themes };
+  return { theme, themeLoaded, saveTheme, themes };
 };
