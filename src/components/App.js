@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../helpers/globalStyle";
+import { useFont } from "../helpers/useFont";
 import { useTheme } from "../helpers/useTheme";
 
 import { ThemeControl } from "./themeControl";
@@ -14,7 +15,10 @@ const Header = styled.div`
 
 export const App = () => {
   const { theme, themeLoaded } = useTheme();
+  const { font, fontLoaded } = useFont();
   const [selectedTheme, setSelectedTheme] = useState(theme);
+
+  const [selectedFont, setSelectedFont] = useState(font);
 
   useEffect(() => {
     setSelectedTheme(theme);
@@ -23,12 +27,13 @@ export const App = () => {
   return (
     <div>
       {themeLoaded && (
-        <ThemeProvider theme={selectedTheme}>
+        <ThemeProvider theme={selectedTheme} font={selectedFont}>
           <GlobalStyles />
           <div>
             <Header>StereoTyper.io</Header>
 
             <ThemeControl changeTheme={setSelectedTheme} />
+            {/* <FontControl changeFont={setSelectedFont} /> */}
           </div>
         </ThemeProvider>
       )}

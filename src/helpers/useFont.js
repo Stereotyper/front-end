@@ -4,7 +4,7 @@ import { saveToLocalStorage, getFromLocalStorage } from "./storage";
 export const useFont = () => {
   const fonts = getFromLocalStorage("all-fonts");
 
-  const [font, setFont] = useState(themes.data.basic);
+  const [font, setFont] = useState(fonts.data.basic);
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
