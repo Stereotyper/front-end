@@ -4,7 +4,7 @@ import { saveToLocalStorage, getFromLocalStorage } from "./storage";
 export const useFont = () => {
   const fonts = getFromLocalStorage("all-fonts");
 
-  const [font, setFont] = useState(fonts.data.basic);
+  const [font, setFont] = useState(fonts.data.Montserrat);
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -14,12 +14,10 @@ export const useFont = () => {
   };
 
   useEffect(() => {
-    if (!fontLoaded) {
-      const localFont = getFromLocalStorage("font");
-      localFont ? setFont(localFont) : setFont(fonts.data.montserrat);
-      setFontLoaded(true);
-    }
-  });
+    const localFont = getFromLocalStorage("font");
+    localFont ? setFont(localFont) : setFont(fonts.data.Montserrat);
+    setFontLoaded(true);
+  }, []);
 
   return { font, fontLoaded, saveFont, fonts };
 };
