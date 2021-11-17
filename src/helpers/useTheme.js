@@ -13,9 +13,6 @@ export const useTheme = () => {
     setTheme(mode);
   };
 
-  // will be handling this elsewhere
-  const getFonts = () => {};
-
   useEffect(() => {
     const localTheme = getFromLocalStorage("theme");
     localTheme ? setTheme(localTheme) : setTheme(themes.data.light);

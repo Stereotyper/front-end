@@ -14,9 +14,11 @@ export const useFont = () => {
   };
 
   useEffect(() => {
-    const localFont = getFromLocalStorage("font");
-    localFont ? setFont(localFont) : setFont(fonts.data.basic);
-    setFontLoaded(true);
+    if (!fontLoaded) {
+      const localFont = getFromLocalStorage("font");
+      localFont ? setFont(localFont) : setFont(fonts.data.montserrat);
+      setFontLoaded(true);
+    }
   });
 
   return { font, fontLoaded, saveFont, fonts };

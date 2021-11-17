@@ -8,6 +8,7 @@ import { App } from "../components/App";
 const IndexPage = () => {
   saveToLocalStorage("all-themes", themes.default);
   saveToLocalStorage("all-fonts", fonts.default);
+
   return (
     <main>
       <title>Stereotyper</title>

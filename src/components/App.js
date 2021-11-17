@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../helpers/globalStyle";
 import { useFont } from "../helpers/useFont";
 import { useTheme } from "../helpers/useTheme";
+import { FontControl } from "./fontControl";
 
 import { ThemeControl } from "./themeControl";
 
@@ -22,18 +23,19 @@ export const App = () => {
 
   useEffect(() => {
     setSelectedTheme(theme);
-  }, [themeLoaded]);
+    setSelectedFont(font);
+  }, [themeLoaded, fontLoaded]);
 
   return (
     <div>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme} font={selectedFont}>
-          <GlobalStyles />
+          <GlobalStyles font={selectedFont} />
           <div>
             <Header>StereoTyper.io</Header>
 
             <ThemeControl changeTheme={setSelectedTheme} />
-            {/* <FontControl changeFont={setSelectedFont} /> */}
+            <FontControl changeFont={setSelectedFont} />
           </div>
         </ThemeProvider>
       )}
