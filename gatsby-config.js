@@ -8,7 +8,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Nixie One\:400`],
+        fonts: [
+          `Nixie One\:400`,
+          `Montserrat\:400`,
+          `Roboto`,
+          `Outfit`,
+          `Raleway`,
+          `Montagu Slab`,
+        ],
         display: "swap",
       },
     },

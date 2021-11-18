@@ -1,16 +1,32 @@
 {
   "data": {
     "Montserrat": {
-      "name": "Montserrat"
+      "name": "Montserrat",
+      "size": "12px"
     },
     "Roboto": {
-      "name": "Roboto"
+      "name": "Roboto",
+      "size": "12px"
     },
     "Fantasy": {
-      "name": "Fantasy"
+      "name": "Fantasy",
+      "size": "12px"
     },
     "Nixie One": {
-      "name": "Nixie One"
+      "name": "Nixie One",
+      "size": "12px"
+    },
+    "Outfit": {
+      "name": "Outfit",
+      "size": "16px"
+    },
+    "Raleway": {
+      "name": "Raleway",
+      "size": "12px"
+    },
+    "Montagu Slab": {
+      "name": "Montagu Slab",
+      "size": "12px"
     }
   }
 }

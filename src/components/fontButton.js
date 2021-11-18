@@ -22,6 +22,8 @@ const Button = styled.div`
 export const FontButton = ({ changeFont, font }) => {
   const { saveFont } = useFont();
 
+  console.log(font.size);
+
   const fontSwitcher = (selectedFont) => {
     saveFont(selectedFont);
     changeFont(selectedFont);
@@ -31,8 +33,6 @@ export const FontButton = ({ changeFont, font }) => {
       onClick={() => fontSwitcher(font)}
       style={{
         fontFamily: `${font.name}`,
-        // backgroundColor: `${theme.colors.button.background}`,
-        // color: `${theme.colors.button.text}`,
       }}
     >
       {font.name}
