@@ -22,8 +22,6 @@ const Button = styled.div`
 export const FontButton = ({ changeFont, font }) => {
   const { saveFont } = useFont();
 
-  console.log(font.size);
-
   const fontSwitcher = (selectedFont) => {
     saveFont(selectedFont);
     changeFont(selectedFont);

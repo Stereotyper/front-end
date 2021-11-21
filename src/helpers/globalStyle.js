@@ -8,4 +8,8 @@ export const GlobalStyles = createGlobalStyle`
     font-size: ${({ font }) => font.size};
     transition: all 0.35s linear;
     }
+
+  .hidden {
+    display: none !important;
+  }
 `;

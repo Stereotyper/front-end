@@ -6,6 +6,7 @@ import { useFont } from "../helpers/useFont";
 import { FontControl } from "./fontControl";
 
 import { ThemeControl } from "./themeControl";
+import { TypingPanel } from "./typingPanel";
 
 const Header = styled.div`
   text-align: center;
@@ -32,7 +33,7 @@ export const App = () => {
           <GlobalStyles font={selectedFont} />
           <div>
             <Header>StereoTyper.io</Header>
-
+            <TypingPanel />
             <ThemeControl changeTheme={setSelectedTheme} />
             <FontControl changeFont={setSelectedFont} />
           </div>
