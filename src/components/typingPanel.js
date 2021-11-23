@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
+import * as words from "../helpers/words.json";
+
 const Panel = styled.div`
   display: flex;
   border: 1.2rem;
@@ -20,10 +22,17 @@ const TextInput = styled.input`
 `;
 
 export const TypingPanel = () => {
+  const NUM_WORDS = 100;
   const [textInput, setTextInput] = useState("");
   const index = useRef(0);
   const words = ["test", "this", "and", "also", "something", "else"];
   const [word, setWord] = useState(words[index.current]);
+
+  const randomIndexes = () => {
+    for (let i = 0; i < NUM_WORDS; i++) {
+      console.log(words);
+    }
+  };
 
   const onSpacePress = (event) => {
     if (event.charCode == 32) {
