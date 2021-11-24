@@ -8,6 +8,10 @@
         "button": {
           "text": "#1a1a1a",
           "background": "#EAEAEA"
+        },
+        "word": {
+          "correct": "green",
+          "incorrect": "red"
         }
       }
     },
@@ -19,6 +23,10 @@
         "button": {
           "text": "#CCCCC6",
           "background": "#272822"
+        },
+        "span": {
+          "correct": "green",
+          "incorrect": "red"
         }
       }
     },
@@ -30,6 +38,10 @@
         "button": {
           "text": "#eceff4",
           "background": "#2e3440"
+        },
+        "span": {
+          "correct": "green",
+          "incorrect": "red"
         }
       }
     },
@@ -41,6 +53,10 @@
         "button": {
           "text": "#f00d00",
           "background": "#fefef5"
+        },
+        "span": {
+          "correct": "green",
+          "incorrect": "red"
         }
       }
     }
