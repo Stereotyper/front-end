@@ -21,6 +21,27 @@ const TextInput = styled.input`
   font-family: inherit;
 `;
 
+const WordSpanWrapper = styled.span`
+  white-space: nowrap;
+`;
+const WordSpan = styled.span`
+  ${({ current }) =>
+    current &&
+    `
+    background-color: blue;
+  `}
+  ${({ correct }) =>
+    correct &&
+    `
+    background-color: green;
+  `}
+    ${({ incorrect }) =>
+    incorrect &&
+    `
+    background-color: red;
+  `}
+`;
+
 export const TypingPanel = () => {
   const NUM_WORDS = 100;
   const [textInput, setTextInput] = useState("");
@@ -40,10 +61,16 @@ export const TypingPanel = () => {
       else console.log("uncool");
       index.current += 1;
       setWord(words[index.current]);
+      updateWord(index.current);
       clearText(event);
     }
   };
 
+  const updateWord = (index) => {
+    // incorrect/correct highlighting after space event
+    // highlight next word to type
+    console.log(index);
+  };
   const handleChange = (event) => {
     if (event.charCode == 32) clearText(event);
     setTextInput(event.target.value);
@@ -55,9 +82,17 @@ export const TypingPanel = () => {
 
   return (
     <Panel>
-      <div>{words.join(" ")}</div>
+      <div>
+        {words.map((n, index) => (
+          <WordSpanWrapper key={index}>
+            <WordSpan key={index} current={index == 0} correct="" incorrect="">
+              {`${n}`}
+            </WordSpan>
+            {` `}
+          </WordSpanWrapper>
+        ))}
+      </div>
       <div>{word}</div>
-      {/* <div>{words[index.current + 1]}</div> */}
       <TextInput
         type="text"
         value={textInput.trim()}

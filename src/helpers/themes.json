@@ -24,7 +24,7 @@
           "text": "#CCCCC6",
           "background": "#272822"
         },
-        "span": {
+        "word": {
           "correct": "green",
           "incorrect": "red"
         }
@@ -39,7 +39,7 @@
           "text": "#eceff4",
           "background": "#2e3440"
         },
-        "span": {
+        "word": {
           "correct": "green",
           "incorrect": "red"
         }
@@ -54,7 +54,7 @@
           "text": "#f00d00",
           "background": "#fefef5"
         },
-        "span": {
+        "word": {
           "correct": "green",
           "incorrect": "red"
         }

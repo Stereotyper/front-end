@@ -12,4 +12,15 @@ export const GlobalStyles = createGlobalStyle`
   .hidden {
     display: none !important;
   }
+
+  input {
+    font-family: ${({ font }) => font.name};
+    font-size: ${({ font }) => font.size};
+  }
+
+  span {
+    white-space: nowrap;
+    /* background-color: ${({ theme }) => theme.colors.word.correct}; */
+
+  }
 `;
