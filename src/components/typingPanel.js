@@ -28,7 +28,7 @@ const WordSpan = styled.span`
   ${({ current }) =>
     current &&
     `
-    background-color: blue;
+    // background-color: blue;
   `}
   ${({ correct }) =>
     correct &&
@@ -45,9 +45,23 @@ const WordSpan = styled.span`
 export const TypingPanel = () => {
   const NUM_WORDS = 100;
   const [textInput, setTextInput] = useState("");
-  const index = useRef(0);
+  const currentWordIndex = useRef(0);
   const words = ["test", "this", "and", "also", "something", "else"];
-  const [word, setWord] = useState(words[index.current]);
+  const [word, setWord] = useState(words[currentWordIndex.current]);
+
+  const wordRef = React.useRef(word);
+
+  // const wordRef = useRef(
+  //   Array.from({ length: NUM_WORDS }, () => React.createRef())
+  // );
+
+  // let refs = useRef([React.createRef(), React.createRef()]);
+
+  // console.log(wordRef.current);
+
+  useEffect(() => {
+    wordRef.current.children[currentWordIndex.current].focus();
+  }, []);
 
   const randomIndexes = () => {
     for (let i = 0; i < NUM_WORDS; i++) {
@@ -57,20 +71,33 @@ export const TypingPanel = () => {
 
   const onSpacePress = (event) => {
     if (event.charCode == 32) {
-      if (textInput === word) console.log("cool");
-      else console.log("uncool");
-      index.current += 1;
-      setWord(words[index.current]);
-      updateWord(index.current);
+      // Check if word was typed correctly
+      if (textInput === word) updateWord(currentWordIndex.current, true);
+      else updateWord(currentWordIndex.current, false);
+
+      // Set to next word and highlight
+      currentWordIndex.current += 1;
+      setWord(words[currentWordIndex.current]);
+      highlightNext(currentWordIndex.current);
       clearText(event);
     }
   };
 
-  const updateWord = (index) => {
+  const updateWord = (current, status) => {
+    console.log(current);
     // incorrect/correct highlighting after space event
-    // highlight next word to type
-    console.log(index);
+    console.log(`${status}: ${words[current]}`);
+    console.log(`Current Index: ${current}`);
+    console.log(wordRef.current.children[current]);
+    if (status)
+      wordRef.current.children[current].style.backgroundColor = "green";
+    else wordRef.current.children[current].style.backgroundColor = "red";
   };
+
+  const highlightNext = (index) => {
+    console.log(`highlight => ${words[index]}`);
+  };
+
   const handleChange = (event) => {
     if (event.charCode == 32) clearText(event);
     setTextInput(event.target.value);
@@ -82,14 +109,11 @@ export const TypingPanel = () => {
 
   return (
     <Panel>
-      <div>
+      <div ref={wordRef}>
         {words.map((n, index) => (
-          <WordSpanWrapper key={index}>
-            <WordSpan key={index} current={index == 0} correct="" incorrect="">
-              {`${n}`}
-            </WordSpan>
-            {` `}
-          </WordSpanWrapper>
+          <WordSpan key={index} correct={""} incorrect={""}>
+            {`${n}`}
+          </WordSpan>
         ))}
       </div>
       <div>{word}</div>
@@ -98,6 +122,7 @@ export const TypingPanel = () => {
         value={textInput.trim()}
         onKeyPress={(key) => onSpacePress(key)}
         onChange={handleChange}
+        autoFocus
       />
     </Panel>
   );
