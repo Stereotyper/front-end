@@ -21,14 +21,11 @@ const TextInput = styled.input`
   font-family: inherit;
 `;
 
-const WordSpanWrapper = styled.span`
-  white-space: nowrap;
-`;
 const WordSpan = styled.span`
   ${({ current }) =>
     current &&
     `
-    // background-color: blue;
+    background-color: blue;
   `}
   ${({ correct }) =>
     correct &&
@@ -51,16 +48,13 @@ export const TypingPanel = () => {
 
   const wordRef = React.useRef(word);
 
-  // const wordRef = useRef(
-  //   Array.from({ length: NUM_WORDS }, () => React.createRef())
-  // );
-
-  // let refs = useRef([React.createRef(), React.createRef()]);
-
-  // console.log(wordRef.current);
-
   useEffect(() => {
-    wordRef.current.children[currentWordIndex.current].focus();
+    if (currentWordIndex.current == 0) {
+      wordRef.current.children[currentWordIndex.current].style.backgroundColor =
+        "pink";
+      wordRef.current.children[currentWordIndex.current].className =
+        "current test";
+    }
   }, []);
 
   const randomIndexes = () => {
@@ -95,6 +89,7 @@ export const TypingPanel = () => {
   };
 
   const highlightNext = (index) => {
+    wordRef.current.children[index].style.backgroundColor = "pink";
     console.log(`highlight => ${words[index]}`);
   };
 
@@ -111,7 +106,7 @@ export const TypingPanel = () => {
     <Panel>
       <div ref={wordRef}>
         {words.map((n, index) => (
-          <WordSpan key={index} correct={""} incorrect={""}>
+          <WordSpan key={index} current={""} correct={""} incorrect={""}>
             {`${n}`}
           </WordSpan>
         ))}
