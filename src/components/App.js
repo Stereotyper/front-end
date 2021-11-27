@@ -33,7 +33,7 @@ export const App = () => {
           <GlobalStyles font={selectedFont} />
           <div>
             <Header>StereoTyper.io</Header>
-            <TypingPanel />
+            <TypingPanel theme={selectedTheme} />
             <ThemeControl changeTheme={setSelectedTheme} />
             <FontControl changeFont={setSelectedFont} />
           </div>

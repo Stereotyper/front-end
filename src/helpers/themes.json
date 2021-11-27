@@ -10,8 +10,9 @@
           "background": "#EAEAEA"
         },
         "word": {
-          "correct": "green",
-          "incorrect": "red"
+          "correct": "orange",
+          "incorrect": "red",
+          "current": "pink"
         }
       }
     },
@@ -26,7 +27,8 @@
         },
         "word": {
           "correct": "green",
-          "incorrect": "red"
+          "incorrect": "red",
+          "current": "pink"
         }
       }
     },
@@ -41,7 +43,8 @@
         },
         "word": {
           "correct": "green",
-          "incorrect": "red"
+          "incorrect": "red",
+          "current": "pink"
         }
       }
     },
@@ -56,7 +59,8 @@
         },
         "word": {
           "correct": "green",
-          "incorrect": "red"
+          "incorrect": "red",
+          "current": "pink"
         }
       }
     }

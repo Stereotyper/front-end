@@ -23,7 +23,18 @@ export const GlobalStyles = createGlobalStyle`
     display: inline-block;
     margin-right:5px;
     padding: 1px;
-    /* background-color: ${({ theme }) => theme.colors.word.correct}; */
-
   }
+
+  .current {
+    background-color: ${({ theme }) => theme.colors.word.current};
+  }
+  
+  .correct {
+    background-color: ${({ theme }) => theme.colors.word.correct};
+  }
+
+  .incorrect {
+    background-color: ${({ theme }) => theme.colors.word.incorrect};
+  }
+
 `;
