@@ -29,6 +29,7 @@ export const TypingPanel = (props) => {
   const currentWordIndex = useRef(0);
   const wordList = ["test", "this", "and", "also", "something", "else"];
   const [word, setWord] = useState(wordList[currentWordIndex.current]);
+  const [complete, setComplete] = useState(false);
 
   const wordRef = React.useRef(word);
 
@@ -46,17 +47,25 @@ export const TypingPanel = (props) => {
 
   const onSpacePress = (event) => {
     if (event.charCode == 32) {
-      // Check if word was typed correctly
-      if (textInput === word) updateWord(currentWordIndex.current, true);
-      else updateWord(currentWordIndex.current, false);
+      if (!complete) {
+        // Check if word was typed correctly
+        if (textInput === word) updateWord(currentWordIndex.current, true);
+        else updateWord(currentWordIndex.current, false);
 
-      // Set to next word and highlight
-      if (currentWordIndex.current < NUM_WORDS) {
+        // Set to next word and highlight
         currentWordIndex.current += 1;
-        highlightNext(currentWordIndex.current);
-        setWord(wordList[currentWordIndex.current]);
-        clearText(event);
+
+        if (currentWordIndex.current == NUM_WORDS) {
+          setComplete(true);
+        }
+
+        if (currentWordIndex.current < NUM_WORDS) {
+          highlightNext(currentWordIndex.current);
+          setWord(wordList[currentWordIndex.current]);
+          clearText(event);
+        }
       }
+      clearText(event);
     }
   };
 
