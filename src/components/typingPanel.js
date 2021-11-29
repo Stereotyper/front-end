@@ -15,19 +15,27 @@ const Panel = styled.div`
 
 const TextDisplay = styled.div`
   text-align: center;
+  width: 500px;
+  margin: 0 auto;
+  padding-bottom: 20px;
 `;
 const TextInput = styled.input`
   text-align: left;
   font-family: inherit;
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 20px;
 `;
 
 const WordSpan = styled.span``;
 
-export const TypingPanel = (props) => {
+export const TypingPanel = () => {
   const NUM_WORDS = 6;
   const [textInput, setTextInput] = useState("");
+
   const currentWordIndex = useRef(0);
   const wordList = ["test", "this", "and", "also", "something", "else"];
+
   const [word, setWord] = useState(wordList[currentWordIndex.current]);
   const [complete, setComplete] = useState(false);
 
@@ -35,6 +43,7 @@ export const TypingPanel = (props) => {
 
   useEffect(() => {
     if (currentWordIndex.current == 0) {
+      console.log(wordRef);
       wordRef.current.children[currentWordIndex.current].className = `current`;
     }
   }, []);
@@ -90,11 +99,11 @@ export const TypingPanel = (props) => {
 
   return (
     <Panel>
-      <div ref={wordRef}>
-        {wordList.map((n, index) => (
-          <WordSpan key={index}>{`${n}`}</WordSpan>
+      <TextDisplay ref={wordRef}>
+        {wordList.map((word, index) => (
+          <WordSpan key={index}>{`${word}`}</WordSpan>
         ))}
-      </div>
+      </TextDisplay>
 
       <TextInput
         type="text"
