@@ -18,23 +18,16 @@ export const GlobalStyles = createGlobalStyle`
     font-size: ${({ font }) => font.size};
   }
 
-  span {
-    white-space: nowrap;
-    display: inline-block;
-    margin-right:5px;
-    padding: 1px;
+  .current {
+    color: ${({ theme }) => theme.colors.word.current};
   }
 
-  .current {
-    background-color: ${({ theme }) => theme.colors.word.current};
-  }
-  
   .correct {
-    background-color: ${({ theme }) => theme.colors.word.correct};
+    color: ${({ theme }) => theme.colors.word.correct};
   }
 
   .incorrect {
-    background-color: ${({ theme }) => theme.colors.word.incorrect};
+    color: ${({ theme }) => theme.colors.word.incorrect};
   }
 
 `;
