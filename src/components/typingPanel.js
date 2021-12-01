@@ -15,7 +15,7 @@ const Panel = styled.div`
 
 const TextDisplay = styled.div`
   text-align: center;
-  width: 500px;
+  width: 45ch;
   margin: 0 auto;
   padding-bottom: 20px;
 `;
