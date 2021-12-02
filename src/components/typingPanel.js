@@ -19,6 +19,7 @@ const TextDisplay = styled.div`
   margin: 0 auto;
   padding-bottom: 20px;
 `;
+
 const TextInput = styled.input`
   text-align: left;
   font-family: inherit;
