@@ -22,6 +22,7 @@ export const App = () => {
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
   const [selectedFont, setSelectedFont] = useState(font);
+  const [list] = useState(createRandomWordList(NUM_WORDS));
 
   useEffect(() => {
     setSelectedFont(font);
@@ -37,7 +38,7 @@ export const App = () => {
             <Header>StereoTyper.io</Header>
             <TypingPanel
               numWords={NUM_WORDS}
-              list={createRandomWordList(NUM_WORDS)}
+              list={list}
               theme={selectedTheme}
             />
             <ThemeControl changeTheme={setSelectedTheme} />

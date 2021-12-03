@@ -4,9 +4,6 @@ import styled from "styled-components";
 
 import * as wordsArray from "../helpers/words.json";
 
-// import *x function from ""
-import { createRandomWordList } from "../helpers/wordsHelper";
-
 const Panel = styled.div`
   display: flex;
   border: 1.2rem;
@@ -23,7 +20,7 @@ const TextDisplay = styled.div`
   padding: 10px;
   width: 45ch;
   margin: 0 auto;
-  /* padding-bottom: 20px; */
+  transition: all 0.35s linear;
 `;
 
 const TextInput = styled.input`
@@ -44,8 +41,8 @@ export const TypingPanel = ({ numWords, list }) => {
   const [complete, setComplete] = useState(false);
 
   let wordList = list;
-  const [word, setWord] = useState(wordList[0]);
-  const wordRef = React.useRef(word);
+  const [word, setWord] = useState(list[0]);
+  const wordRef = React.useRef(list[0]);
 
   useEffect(() => {
     if (currentWordIndex.current == 0) {
