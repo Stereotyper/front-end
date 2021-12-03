@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLayoutEffect } from "react";
 import styled from "styled-components";
 
 import * as wordsArray from "../helpers/words.json";
+
+// import *x function from ""
+import { createRandomWordList } from "../helpers/wordsHelper";
 
 const Panel = styled.div`
   display: flex;
@@ -14,47 +18,40 @@ const Panel = styled.div`
 `;
 
 const TextDisplay = styled.div`
-  text-align: center;
+  text-align: justify;
+  border: 1px solid black;
+  padding: 10px;
   width: 45ch;
   margin: 0 auto;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 `;
 
 const TextInput = styled.input`
+  padding: 10px;
   text-align: left;
   font-family: inherit;
-  width: 500px;
+  width: 45ch;
   margin: 0 auto;
   margin-bottom: 20px;
 `;
 
-export const TypingPanel = () => {
-  const NUM_WORDS = 6;
+export const TypingPanel = ({ numWords, list }) => {
+  const NUM_WORDS = numWords;
   const [textInput, setTextInput] = useState("");
 
   const currentWordIndex = useRef(0);
-  const wordList = ["test", "this", "and", "also", "something", "else"];
 
-  const [word, setWord] = useState(wordList[currentWordIndex.current]);
   const [complete, setComplete] = useState(false);
 
+  let wordList = list;
+  const [word, setWord] = useState(wordList[0]);
   const wordRef = React.useRef(word);
 
   useEffect(() => {
     if (currentWordIndex.current == 0) {
-      console.log(wordRef);
       wordRef.current.children[currentWordIndex.current].className = `current`;
     }
   }, []);
-
-  const randomIndexes = () => {
-    for (let i = 0; i < NUM_WORDS; i++) {
-      // generate random index between 0 and NUM_WORDS
-      console.log(wordsArray[i]);
-    }
-  };
-
-  randomIndexes();
 
   const onSpacePress = (event) => {
     if (event.charCode == 32) {
@@ -106,7 +103,6 @@ export const TypingPanel = () => {
           <span key={index}>{`${word} `}</span>
         ))}
       </TextDisplay>
-
       <TextInput
         type="text"
         value={textInput.trim()}

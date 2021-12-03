@@ -7,6 +7,7 @@ import { FontControl } from "./fontControl";
 
 import { ThemeControl } from "./themeControl";
 import { TypingPanel } from "./typingPanel";
+import { createRandomWordList } from "../helpers/wordsHelper";
 
 const Header = styled.div`
   text-align: center;
@@ -16,6 +17,7 @@ const Header = styled.div`
 `;
 
 export const App = () => {
+  const NUM_WORDS = 75;
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
@@ -33,7 +35,11 @@ export const App = () => {
           <GlobalStyles font={selectedFont} />
           <div>
             <Header>StereoTyper.io</Header>
-            <TypingPanel theme={selectedTheme} />
+            <TypingPanel
+              numWords={NUM_WORDS}
+              list={createRandomWordList(NUM_WORDS)}
+              theme={selectedTheme}
+            />
             <ThemeControl changeTheme={setSelectedTheme} />
             <FontControl changeFont={setSelectedFont} />
           </div>
