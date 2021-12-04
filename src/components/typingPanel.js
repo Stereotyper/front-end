@@ -5,8 +5,8 @@ import styled from "styled-components";
 import * as wordsArray from "../helpers/words.json";
 
 const Panel = styled.div`
-  display: flex;
   border: 1.2rem;
+  display: flex;
   justify-content: center;
   flex-direction: column;
   width: 80%;
@@ -18,7 +18,7 @@ const TextDisplay = styled.div`
   text-align: justify;
   border: 1px solid black;
   padding: 10px;
-  width: 45ch;
+  width: 50ch;
   margin: 0 auto;
   transition: all 0.35s linear;
 `;
@@ -27,7 +27,7 @@ const TextInput = styled.input`
   padding: 10px;
   text-align: left;
   font-family: inherit;
-  width: 45ch;
+  width: 50ch;
   margin: 0 auto;
   margin-bottom: 20px;
 `;
