@@ -4,7 +4,7 @@ import { saveToLocalStorage, getFromLocalStorage } from "./storage";
 export const useTheme = () => {
   const themes = getFromLocalStorage("all-themes");
 
-  const [theme, setTheme] = useState(themes.data.light);
+  const [theme, setTheme] = useState(themes.data.nord);
 
   const [themeLoaded, setThemeLoaded] = useState(false);
 
@@ -15,7 +15,7 @@ export const useTheme = () => {
 
   useEffect(() => {
     const localTheme = getFromLocalStorage("theme");
-    localTheme ? setTheme(localTheme) : setTheme(themes.data.light);
+    localTheme ? setTheme(localTheme) : setTheme(themes.data.nord);
     setThemeLoaded(true);
   }, []);
 

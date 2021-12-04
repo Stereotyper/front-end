@@ -21,10 +21,6 @@ export const GlobalStyles = createGlobalStyle`
     transform: translate(-50%, -50%);
   }
 
-  .theme-button{
-
-  }
-  
   body {
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};

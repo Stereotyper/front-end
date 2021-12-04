@@ -17,7 +17,7 @@ const Header = styled.div`
 `;
 
 export const App = () => {
-  const NUM_WORDS = 75;
+  const NUM_WORDS = 50;
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
@@ -34,12 +34,10 @@ export const App = () => {
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles font={selectedFont} />
-          {/* <div> */}
           <Header>StereoTyper.io</Header>
           <TypingPanel numWords={NUM_WORDS} list={list} theme={selectedTheme} />
-          <ThemeControl changeTheme={setSelectedTheme} />
-          <FontControl changeFont={setSelectedFont} />
-          {/* </div> */}
+          {/* <ThemeControl changeTheme={setSelectedTheme} /> */}
+          {/* <FontControl changeFont={setSelectedFont} /> */}
         </ThemeProvider>
       )}
     </div>

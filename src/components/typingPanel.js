@@ -31,7 +31,24 @@ const TextInput = styled.input`
   margin-bottom: 20px;
 `;
 
-const TopButtonsWrapper = styled.div``;
+const TopButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+const TopButton = styled.button`
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export const TypingPanel = ({ numWords, list }) => {
   const NUM_WORDS = numWords;
@@ -96,8 +113,12 @@ export const TypingPanel = ({ numWords, list }) => {
 
   return (
     <Panel className="typing-panel">
-      <TopButtonsWrapper></TopButtonsWrapper>
-      <button>Theme</button>
+      {/* <TopButtonsWrapper>
+        <TopButton>Theme</TopButton>
+        <TopButton>Randomize</TopButton>
+        <TopButton>Font</TopButton>
+      </TopButtonsWrapper> */}
+
       <TextDisplay ref={wordRef}>
         {wordList.map((word, index) => (
           <span key={index}>{`${word} `}</span>
