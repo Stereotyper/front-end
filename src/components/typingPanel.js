@@ -9,7 +9,6 @@ const Panel = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 80%;
   align-content: center;
   margin: 0 auto;
 `;
@@ -31,6 +30,8 @@ const TextInput = styled.input`
   margin: 0 auto;
   margin-bottom: 20px;
 `;
+
+const TopButtonsWrapper = styled.div``;
 
 export const TypingPanel = ({ numWords, list }) => {
   const NUM_WORDS = numWords;
@@ -94,7 +95,9 @@ export const TypingPanel = ({ numWords, list }) => {
   };
 
   return (
-    <Panel>
+    <Panel className="typing-panel">
+      <TopButtonsWrapper></TopButtonsWrapper>
+      <button>Theme</button>
       <TextDisplay ref={wordRef}>
         {wordList.map((word, index) => (
           <span key={index}>{`${word} `}</span>

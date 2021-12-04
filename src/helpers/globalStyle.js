@@ -1,13 +1,38 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+
+  html, body, #___gatsby, #gatsby-focus-wrapper {
+    height: 100%;
+  }
+
+  main {
+    height: 100%;
+  }
+
+  .app{
+    height: 100%;
+  }
+
+  .typing-panel{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .theme-button{
+
+  }
+  
   body {
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ font }) => font.name};
     font-size: ${({ font }) => font.size};
     transition: all 0.35s linear;
-    }
+    margin: 0px;
+  }
 
   .hidden {
     display: none !important;

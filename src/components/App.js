@@ -30,20 +30,16 @@ export const App = () => {
   }, [themeLoaded, fontLoaded]);
 
   return (
-    <div>
+    <div className="app">
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles font={selectedFont} />
-          <div>
-            <Header>StereoTyper.io</Header>
-            <TypingPanel
-              numWords={NUM_WORDS}
-              list={list}
-              theme={selectedTheme}
-            />
-            <ThemeControl changeTheme={setSelectedTheme} />
-            <FontControl changeFont={setSelectedFont} />
-          </div>
+          {/* <div> */}
+          <Header>StereoTyper.io</Header>
+          <TypingPanel numWords={NUM_WORDS} list={list} theme={selectedTheme} />
+          <ThemeControl changeTheme={setSelectedTheme} />
+          <FontControl changeFont={setSelectedFont} />
+          {/* </div> */}
         </ThemeProvider>
       )}
     </div>
