@@ -1,4 +1,4 @@
-const isBrowser = typeof window !== "undefined";
+const isBrowser = typeof window !== "undefined" && window.localStorage;
 
 export const saveToLocalStorage = (key, value) => {
   if (isBrowser) window.localStorage.setItem(key, JSON.stringify(value));

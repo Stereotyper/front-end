@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { saveToLocalStorage, getFromLocalStorage } from "./storage";
 
-export const useTheme = () => {
-  const themes = getFromLocalStorage("all-themes");
+const isBrowser = typeof window !== "undefined" && window.localStorage;
 
-  const [theme, setTheme] = useState(themes.data.nord);
+export const useTheme = () => {
+  const themes = isBrowser && getFromLocalStorage("all-themes");
+
+  const defaultValue = isBrowser && themes.data.nord;
+
+  const [theme, setTheme] = useState(defaultValue);
 
   const [themeLoaded, setThemeLoaded] = useState(false);
 
@@ -14,9 +18,11 @@ export const useTheme = () => {
   };
 
   useEffect(() => {
-    const localTheme = getFromLocalStorage("theme");
-    localTheme ? setTheme(localTheme) : setTheme(themes.data.nord);
-    setThemeLoaded(true);
+    if (typeof window !== "undefined" && window.localStorage) {
+      const localTheme = getFromLocalStorage("theme");
+      localTheme ? setTheme(localTheme) : setTheme(themes.data.nord);
+      setThemeLoaded(true);
+    }
   }, []);
 
   return { theme, themeLoaded, saveTheme, themes };

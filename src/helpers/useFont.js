@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { saveToLocalStorage, getFromLocalStorage } from "./storage";
 
-export const useFont = () => {
-  const fonts = getFromLocalStorage("all-fonts");
+const isBrowser = typeof window !== "undefined" && window.localStorage;
 
-  const [font, setFont] = useState(fonts.data.Montserrat);
+export const useFont = () => {
+  const fonts = isBrowser && getFromLocalStorage("all-fonts");
+
+  const defaultValue = isBrowser && fonts.data.Montserrat;
+
+  const [font, setFont] = useState(defaultValue);
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -14,9 +18,11 @@ export const useFont = () => {
   };
 
   useEffect(() => {
-    const localFont = getFromLocalStorage("font");
-    localFont ? setFont(localFont) : setFont(fonts.data.Montserrat);
-    setFontLoaded(true);
+    if (typeof window !== "undefined" && window.localStorage) {
+      const localFont = getFromLocalStorage("font");
+      localFont ? setFont(localFont) : setFont(fonts.data.Montserrat);
+      setFontLoaded(true);
+    }
   }, []);
 
   return { font, fontLoaded, saveFont, fonts };

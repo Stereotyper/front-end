@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.stereotyper.io",
+    siteUrl: "https://stereotyper.io/",
     title: "Stereotyper",
   },
   plugins: [

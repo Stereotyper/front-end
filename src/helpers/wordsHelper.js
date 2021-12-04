@@ -13,6 +13,5 @@ export function createRandomWordList(MAX_LENGTH) {
     if (wordList.indexOf(number) === -1) wordList.push(words[number]);
   }
 
-  console.log(wordList);
   return wordList;
 }
