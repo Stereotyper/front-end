@@ -1,0 +1,32 @@
+{
+  "data": {
+    "Montserrat": {
+      "name": "Montserrat",
+      "size": "1.2rem"
+    },
+    "Roboto": {
+      "name": "Roboto",
+      "size": "1.2rem"
+    },
+    "Fantasy": {
+      "name": "Fantasy",
+      "size": "1.2rem"
+    },
+    "Nixie One": {
+      "name": "Nixie One",
+      "size": "1.2rem"
+    },
+    "Outfit": {
+      "name": "Outfit",
+      "size": "1.2rem"
+    },
+    "Raleway": {
+      "name": "Raleway",
+      "size": "1.2rem"
+    },
+    "Montagu Slab": {
+      "name": "Montagu Slab",
+      "size": "1.2rem"
+    }
+  }
+}

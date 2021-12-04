@@ -1,0 +1,100 @@
+{
+  "data": {
+    "light": {
+      "name": "Light",
+      "colors": {
+        "body": "#FAFAFA",
+        "text": "#1a1a1a",
+        "button": {
+          "text": "#1a1a1a",
+          "background": "#EAEAEA"
+        },
+        "word": {
+          "correct": "#68B723",
+          "incorrect": "#C6262E",
+          "current": "#a882d1"
+        }
+      }
+    },
+    "monokai": {
+      "name": "Monokai",
+      "colors": {
+        "body": "#272822",
+        "text": "#A6E22E",
+        "button": {
+          "text": "#A6E22E",
+          "background": "#31332b"
+        },
+        "word": {
+          "correct": "#66D9EF",
+          "incorrect": "#F92672",
+          "current": "#AE81FF"
+        }
+      }
+    },
+    "nord": {
+      "name": "Nord",
+      "colors": {
+        "body": "#2e3440",
+        "text": "#eceff4",
+        "button": {
+          "text": "#eceff4",
+          "background": "#434c5e"
+        },
+        "word": {
+          "correct": "#a3be8c",
+          "incorrect": "#bf616a",
+          "current": "#ebcb8b"
+        }
+      }
+    },
+    "electric": {
+      "name": "Electric",
+      "colors": {
+        "body": "#C7E3DD",
+        "text": "#301330",
+        "button": {
+          "text": "#301330",
+          "background": "#F4FEF3"
+        },
+        "word": {
+          "correct": "#71D14D",
+          "incorrect": "#363534",
+          "current": "#EF79FD"
+        }
+      }
+    },
+    "one-dark-pro": {
+      "name": "One Dark",
+      "colors": {
+        "body": "#282c34",
+        "text": "#abb2bf",
+        "button": {
+          "text": "#abb2bf",
+          "background": "#424855"
+        },
+        "word": {
+          "correct": "#98c379",
+          "incorrect": "#E06C75",
+          "current": "#C477DB"
+        }
+      }
+    },
+    "grey-scale": {
+      "name": "Grey",
+      "colors": {
+        "body": "#FCFCFC",
+        "text": "#6C7680",
+        "button": {
+          "text": "#6C7680",
+          "background": "#ddd"
+        },
+        "word": {
+          "correct": "#FDCC60",
+          "incorrect": "#EC7171",
+          "current": "#60B8D6"
+        }
+      }
+    }
+  }
+}
