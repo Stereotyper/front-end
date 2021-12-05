@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../helpers/globalStyle";
 import { useTheme } from "../helpers/useTheme";
@@ -30,7 +30,6 @@ export const App = () => {
   }, [themeLoaded, fontLoaded]);
 
   const updateList = () => {
-    // console.log("parent");
     setList(createRandomWordList(NUM_WORDS));
   };
 

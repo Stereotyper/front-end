@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useLayoutEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+// import { useLayoutEffect } from "react";
 import styled from "styled-components";
 
 const Panel = styled.div`
@@ -60,6 +60,7 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   const [complete, setComplete] = useState(false);
 
   const [word, setWord] = useState(list[0]);
+
   const wordRef = useRef(list[0]);
 
   useEffect(() => {
