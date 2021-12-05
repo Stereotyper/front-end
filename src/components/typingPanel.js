@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useLayoutEffect } from "react";
 import styled from "styled-components";
-
-import * as wordsArray from "../helpers/words.json";
 
 const Panel = styled.div`
   border: 1.2rem;
@@ -50,32 +48,37 @@ const TopButton = styled.button`
   }
 `;
 
-export const TypingPanel = ({ numWords, list }) => {
+export const TypingPanel = ({ numWords, list, onReset, firstWord }) => {
+  const [wordList, setWordList] = useState(list);
+
   const NUM_WORDS = numWords;
+
   const [textInput, setTextInput] = useState("");
 
   const currentWordIndex = useRef(0);
 
   const [complete, setComplete] = useState(false);
 
-  let wordList = list;
-  const [word, setWord] = useState(list[0]);
-  const wordRef = React.useRef(list[0]);
+  const [word, setWord] = useState(firstWord);
+  const wordRef = useRef(firstWord);
 
   useEffect(() => {
-    if (currentWordIndex.current == 0) {
-      wordRef.current.children[currentWordIndex.current].className = `current`;
-    }
-  }, []);
+    setWordList(list);
+    setWord(firstWord);
+
+    wordRef.current.children[currentWordIndex.current].className = `current`;
+  }, [list, wordRef, currentWordIndex, firstWord]);
 
   const onSpacePress = (event) => {
     if (event.charCode == 32) {
       if (!complete) {
         // Check if word was typed correctly
+
         if (textInput === word) updateWord(currentWordIndex.current, true);
         else updateWord(currentWordIndex.current, false);
 
         // Set to next word and highlight
+        // setCurrentWordIndex(currentWordIndex + 1);
         currentWordIndex.current += 1;
 
         if (currentWordIndex.current == NUM_WORDS) {
@@ -111,6 +114,14 @@ export const TypingPanel = ({ numWords, list }) => {
     setTextInput("");
   };
 
+  const handleClick = useCallback(() => {
+    for (let i = 0; i < NUM_WORDS; i++) {
+      wordRef.current.children[i].className = ``;
+    }
+    currentWordIndex.current = 0;
+    onReset();
+  });
+
   return (
     <Panel className="typing-panel">
       {/* <TopButtonsWrapper>
@@ -118,6 +129,8 @@ export const TypingPanel = ({ numWords, list }) => {
         <TopButton>Randomize</TopButton>
         <TopButton>Font</TopButton>
       </TopButtonsWrapper> */}
+
+      <button onClick={() => handleClick()}>Reset!</button>
 
       <TextDisplay ref={wordRef}>
         {wordList.map((word, index) => (

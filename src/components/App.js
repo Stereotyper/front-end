@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../helpers/globalStyle";
 import { useTheme } from "../helpers/useTheme";
@@ -22,12 +22,17 @@ export const App = () => {
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
   const [selectedFont, setSelectedFont] = useState(font);
-  const [list] = useState(createRandomWordList(NUM_WORDS));
+  const [list, setList] = useState(createRandomWordList(NUM_WORDS));
 
   useEffect(() => {
     setSelectedFont(font);
     setSelectedTheme(theme);
   }, [themeLoaded, fontLoaded]);
+
+  const updateList = () => {
+    // console.log("parent");
+    setList(createRandomWordList(NUM_WORDS));
+  };
 
   return (
     <div className="app">
@@ -35,9 +40,16 @@ export const App = () => {
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles font={selectedFont} />
           <Header>StereoTyper.io</Header>
-          <TypingPanel numWords={NUM_WORDS} list={list} theme={selectedTheme} />
-          {/* <ThemeControl changeTheme={setSelectedTheme} /> */}
-          {/* <FontControl changeFont={setSelectedFont} /> */}
+          <TypingPanel
+            onReset={updateList}
+            numWords={NUM_WORDS}
+            list={list}
+            firstWord={list[0]}
+            startingIndex={0}
+            theme={selectedTheme}
+          />
+          <ThemeControl changeTheme={setSelectedTheme} />
+          <FontControl changeFont={setSelectedFont} />
         </ThemeProvider>
       )}
     </div>
