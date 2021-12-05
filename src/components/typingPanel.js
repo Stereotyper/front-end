@@ -48,7 +48,7 @@ const TopButton = styled.button`
   }
 `;
 
-export const TypingPanel = ({ numWords, list, onReset, firstWord }) => {
+export const TypingPanel = ({ numWords, list, onReset }) => {
   const [wordList, setWordList] = useState(list);
 
   const NUM_WORDS = numWords;
@@ -59,15 +59,15 @@ export const TypingPanel = ({ numWords, list, onReset, firstWord }) => {
 
   const [complete, setComplete] = useState(false);
 
-  const [word, setWord] = useState(firstWord);
-  const wordRef = useRef(firstWord);
+  const [word, setWord] = useState(list[0]);
+  const wordRef = useRef(list[0]);
 
   useEffect(() => {
     setWordList(list);
-    setWord(firstWord);
+    setWord(list[0]);
 
     wordRef.current.children[currentWordIndex.current].className = `current`;
-  }, [list, wordRef, currentWordIndex, firstWord]);
+  }, [list, wordRef, currentWordIndex]);
 
   const onSpacePress = (event) => {
     if (event.charCode == 32) {
@@ -114,13 +114,14 @@ export const TypingPanel = ({ numWords, list, onReset, firstWord }) => {
     setTextInput("");
   };
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     for (let i = 0; i < NUM_WORDS; i++) {
       wordRef.current.children[i].className = ``;
     }
     currentWordIndex.current = 0;
+
     onReset();
-  });
+  };
 
   return (
     <Panel className="typing-panel">

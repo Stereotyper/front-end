@@ -44,8 +44,6 @@ export const App = () => {
             onReset={updateList}
             numWords={NUM_WORDS}
             list={list}
-            firstWord={list[0]}
-            startingIndex={0}
             theme={selectedTheme}
           />
           <ThemeControl changeTheme={setSelectedTheme} />
