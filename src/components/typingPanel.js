@@ -75,11 +75,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
       if (!complete) {
         // Check if word was typed correctly
 
-        if (textInput === word) updateWord(currentWordIndex.current, true);
+        if (textInput == word) updateWord(currentWordIndex.current, true);
         else updateWord(currentWordIndex.current, false);
 
         // Set to next word and highlight
-        // setCurrentWordIndex(currentWordIndex + 1);
         currentWordIndex.current += 1;
 
         if (currentWordIndex.current == NUM_WORDS) {
