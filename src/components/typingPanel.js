@@ -68,16 +68,13 @@ const ResetButton = styled.button`
 export const TypingPanel = ({ numWords, list, onReset }) => {
   const [wordList, setWordList] = useState(list);
   const NUM_WORDS = numWords;
-
   const [textInput, setTextInput] = useState("");
-
   const currentWordIndex = useRef(0);
-
   const [complete, setComplete] = useState(false);
-
   const [word, setWord] = useState(list[0]);
-
   const wordRef = useRef(list[0]);
+
+  const focus = useRef();
 
   useEffect(() => {
     setWordList(list);
@@ -135,7 +132,7 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
       wordRef.current.children[i].className = ``;
     }
     currentWordIndex.current = 0;
-
+    focus.current.focus();
     onReset();
   };
 
@@ -159,9 +156,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
           value={textInput.trim()}
           onKeyPress={(key) => onSpacePress(key)}
           onChange={handleChange}
+          ref={focus}
           autoFocus
         />
-        <ResetButton onClick={() => handleClick()}>Reset</ResetButton>
+        <ResetButton onClick={() => handleClick()}>reset</ResetButton>
       </TextInputWrapper>
     </Panel>
   );
