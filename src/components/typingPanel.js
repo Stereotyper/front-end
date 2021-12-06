@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Panel = styled.div`
-  /* border: 1.2rem; */
+  border: 2px solid ${({ theme }) => theme.colors.text};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 7px;
+  padding: 15px;
+
   display: flex;
   justify-content: center;
   flex-direction: column;
