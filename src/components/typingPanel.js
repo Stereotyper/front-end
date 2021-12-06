@@ -1,32 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { useLayoutEffect } from "react";
 import styled from "styled-components";
 
 const Panel = styled.div`
-  border: 1.2rem;
+  /* border: 1.2rem; */
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-content: center;
   margin: 0 auto;
-`;
-
-const TextDisplay = styled.div`
-  text-align: justify;
-  border: 1px solid black;
-  padding: 10px;
-  width: 50ch;
-  margin: 0 auto;
-  transition: all 0.35s linear;
-`;
-
-const TextInput = styled.input`
-  padding: 10px;
-  text-align: left;
-  font-family: inherit;
-  width: 50ch;
-  margin: 0 auto;
-  margin-bottom: 20px;
 `;
 
 const TopButtonsWrapper = styled.div`
@@ -48,9 +29,37 @@ const TopButton = styled.button`
   }
 `;
 
+const TextDisplay = styled.div`
+  text-align: justify;
+  width: 50ch;
+  margin: 0 auto;
+  transition: all 0.35s linear;
+`;
+
+const TextInputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+`;
+
+const TextInput = styled.input`
+  padding: 10px;
+  text-align: left;
+  font-family: inherit;
+  width: 80%;
+  margin: 0 auto;
+`;
+
+const ResetButton = styled.button`
+  background: ${({ theme }) => theme.colors.button.background};
+  color: ${({ theme }) => theme.colors.text};
+  font-family: inherit;
+  font-size: inherit;
+  width: 20%;
+`;
+
 export const TypingPanel = ({ numWords, list, onReset }) => {
   const [wordList, setWordList] = useState(list);
-
   const NUM_WORDS = numWords;
 
   const [textInput, setTextInput] = useState("");
@@ -131,20 +140,22 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
         <TopButton>Font</TopButton>
       </TopButtonsWrapper> */}
 
-      <button onClick={() => handleClick()}>Reset!</button>
-
       <TextDisplay ref={wordRef}>
         {wordList.map((word, index) => (
           <span key={index}>{`${word} `}</span>
         ))}
       </TextDisplay>
-      <TextInput
-        type="text"
-        value={textInput.trim()}
-        onKeyPress={(key) => onSpacePress(key)}
-        onChange={handleChange}
-        autoFocus
-      />
+
+      <TextInputWrapper>
+        <TextInput
+          type="text"
+          value={textInput.trim()}
+          onKeyPress={(key) => onSpacePress(key)}
+          onChange={handleChange}
+          autoFocus
+        />
+        <ResetButton onClick={() => handleClick()}>Reset</ResetButton>
+      </TextInputWrapper>
     </Panel>
   );
 };
