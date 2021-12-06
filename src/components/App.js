@@ -15,7 +15,7 @@ const Header = styled.div`
 `;
 
 export const App = () => {
-  const NUM_WORDS = 50;
+  const NUM_WORDS = 10;
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();

@@ -55,6 +55,7 @@ const TextInput = styled.input`
   font-family: inherit;
   width: 80%;
   margin: 0 auto;
+  border-radius: 5px;
 `;
 
 const ResetButton = styled.button`
@@ -63,6 +64,8 @@ const ResetButton = styled.button`
   font-family: inherit;
   font-size: inherit;
   width: 20%;
+  margin-left: 10px;
+  border-radius: 5px;
 `;
 
 export const TypingPanel = ({ numWords, list, onReset }) => {
@@ -101,10 +104,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
         if (currentWordIndex.current < NUM_WORDS) {
           highlightNext(currentWordIndex.current);
           setWord(wordList[currentWordIndex.current]);
-          clearText(event);
+          clearText();
         }
       }
-      clearText(event);
+      clearText();
     }
   };
 
@@ -119,20 +122,22 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   };
 
   const handleChange = (event) => {
-    if (event.charCode == 32) clearText(event);
+    if (event.charCode == 32) clearText();
     setTextInput(event.target.value);
   };
 
-  const clearText = (event) => {
+  const clearText = () => {
     setTextInput("");
   };
 
-  const handleClick = () => {
+  const handleClick = (event) => {
     for (let i = 0; i < NUM_WORDS; i++) {
       wordRef.current.children[i].className = ``;
     }
     currentWordIndex.current = 0;
     focus.current.focus();
+    setComplete(false);
+    clearText();
     onReset();
   };
 
