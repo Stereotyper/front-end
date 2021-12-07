@@ -8,10 +8,10 @@ const FontContainer = styled.div`
   flex-direction: row;
 `;
 
-export const FontControl = ({ changeFont }) => {
+export const FontControl = ({ changeFont, show }) => {
   const { fonts } = useFont();
   return (
-    <FontContainer>
+    <FontContainer className={show}>
       {Object.keys(fonts.data).map((font) => (
         <FontButton
           changeFont={changeFont}

@@ -8,11 +8,11 @@ const ThemeContainer = styled.div`
   flex-direction: row;
 `;
 
-export const ThemeControl = ({ changeTheme }) => {
+export const ThemeControl = ({ changeTheme, show }) => {
   const { themes } = useTheme();
 
   return (
-    <ThemeContainer>
+    <ThemeContainer className={show}>
       {Object.keys(themes.data).map((theme) => (
         <ThemeButton
           changeTheme={changeTheme}

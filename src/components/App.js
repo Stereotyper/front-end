@@ -48,8 +48,8 @@ export const App = () => {
   const [selectedFont, setSelectedFont] = useState(font);
   const [list, setList] = useState(createRandomWordList(NUM_WORDS));
 
-  const themeRef = useRef();
-  const fontRef = useRef();
+  const [showTheme, setShowTheme] = useState("hidden");
+  const [showFont, setShowFont] = useState("hidden");
 
   useEffect(() => {
     setSelectedFont(font);
@@ -60,7 +60,19 @@ export const App = () => {
     setList(createRandomWordList(NUM_WORDS));
   };
 
-  const showThemes = () => {};
+  const showThemes = () => {
+    if (showTheme === "hidden") setShowTheme("");
+    else setShowTheme("hidden");
+  };
+
+  const randomize = () => {
+    console.log("randomize");
+  };
+
+  const showFonts = () => {
+    if (showFont === "hidden") setShowFont("");
+    else setShowFont("hidden");
+  };
 
   return (
     <div className="app">
@@ -71,9 +83,9 @@ export const App = () => {
 
           <PanelWrapper>
             <TopButtonsWrapper>
-              <TopButton onclick={() => showThemes()}>Theme</TopButton>
-              <TopButton>Randomize</TopButton>
-              <TopButton>Font</TopButton>
+              <TopButton onClick={() => showThemes()}>Theme</TopButton>
+              <TopButton onClick={() => randomize()}>Randomize</TopButton>
+              <TopButton onClick={() => showFonts()}>Font</TopButton>
             </TopButtonsWrapper>
 
             <TypingPanel
@@ -83,8 +95,8 @@ export const App = () => {
               font={selectedFont}
             />
           </PanelWrapper>
-          <ThemeControl ref={themeRef} changeTheme={setSelectedTheme} />
-          <FontControl ref={fontRef} changeFont={setSelectedFont} />
+          <ThemeControl show={showTheme} changeTheme={setSelectedTheme} />
+          <FontControl show={showFont} changeFont={setSelectedFont} />
         </ThemeProvider>
       )}
     </div>
