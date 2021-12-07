@@ -3,13 +3,8 @@ import styled from "styled-components";
 
 const Panel = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.text};
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 7px;
   padding: 15px;
-
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -66,6 +61,10 @@ const ResetButton = styled.button`
   width: 20%;
   margin-left: 10px;
   border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const TypingPanel = ({ numWords, list, onReset }) => {

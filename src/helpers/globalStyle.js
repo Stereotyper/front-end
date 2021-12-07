@@ -38,7 +38,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${({ font }) => font.name};
     font-size: ${({ font }) => font.size};
     transition: all 0.35s linear;
-
   }
 
   .current {
