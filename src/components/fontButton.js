@@ -3,16 +3,14 @@ import { useFont } from "../helpers/useFont";
 import styled from "styled-components";
 
 const Button = styled.div`
+  background: ${({ theme }) => theme.colors.button.background};
+  color: ${({ theme }) => theme.colors.text};
   border: none;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1.2rem;
   margin-right: 10px;
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.text};
   border-radius: 5px;
-  width: 100%;
 
   &:hover {
     cursor: pointer;

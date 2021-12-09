@@ -28,6 +28,7 @@ const TopButton = styled.button`
   font-family: inherit;
   font-size: inherit;
   border-radius: 5px;
+  padding: 10px;
 
   &:hover {
     cursor: pointer;

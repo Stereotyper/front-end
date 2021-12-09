@@ -3,16 +3,12 @@ import { useTheme } from "../helpers/useTheme";
 import styled from "styled-components";
 
 const Button = styled.div`
-  border: none;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 1.2rem;
   margin-right: 10px;
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.text};
   border-radius: 5px;
-  width: 100%;
 
   &:hover {
     cursor: pointer;
