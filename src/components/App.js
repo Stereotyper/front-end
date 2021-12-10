@@ -51,7 +51,8 @@ export const App = () => {
 
   const [showTheme, setShowTheme] = useState("hidden");
   const [showFont, setShowFont] = useState("hidden");
-
+  const [showTyper, setShowTyper] = useState("");
+  const [showBack, setShowBack] = useState("hidden");
   useEffect(() => {
     setSelectedFont(font);
     setSelectedTheme(theme);
@@ -62,8 +63,15 @@ export const App = () => {
   };
 
   const showThemes = () => {
-    if (showTheme === "hidden") setShowTheme("");
-    else setShowTheme("hidden");
+    if (showTheme === "hidden") {
+      setShowTheme("");
+      setShowTyper("hidden");
+      setShowBack("");
+    } else {
+      setShowTheme("hidden");
+      setShowBack("hidden");
+      setShowTyper("");
+    }
   };
 
   const randomize = () => {
@@ -83,21 +91,29 @@ export const App = () => {
           <Header>StereoTyper.io</Header>
 
           <PanelWrapper>
-            <TopButtonsWrapper>
-              <TopButton onClick={() => showThemes()}>Theme</TopButton>
-              <TopButton onClick={() => randomize()}>Randomize</TopButton>
-              <TopButton onClick={() => showFonts()}>Font</TopButton>
-            </TopButtonsWrapper>
+            <TopButton
+              className={showBack}
+              onClick={() => goBack()}
+            >{`<`}</TopButton>
 
-            <TypingPanel
-              onReset={updateList}
-              numWords={NUM_WORDS}
-              list={list}
-              font={selectedFont}
-            />
+            <FontControl show={showFont} changeFont={setSelectedFont} />
+            <ThemeControl show={showTheme} changeTheme={setSelectedTheme} />
+
+            <div className={showTyper}>
+              <TopButtonsWrapper>
+                <TopButton onClick={() => showThemes()}>Theme</TopButton>
+                <TopButton onClick={() => randomize()}>Randomize</TopButton>
+                <TopButton onClick={() => showFonts()}>Font</TopButton>
+              </TopButtonsWrapper>
+
+              <TypingPanel
+                onReset={updateList}
+                numWords={NUM_WORDS}
+                list={list}
+                font={selectedFont}
+              />
+            </div>
           </PanelWrapper>
-          <ThemeControl show={showTheme} changeTheme={setSelectedTheme} />
-          <FontControl show={showFont} changeFont={setSelectedFont} />
         </ThemeProvider>
       )}
     </div>
