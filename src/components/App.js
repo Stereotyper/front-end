@@ -63,15 +63,9 @@ export const App = () => {
   };
 
   const showThemes = () => {
-    if (showTheme === "hidden") {
-      setShowTheme("");
-      setShowTyper("hidden");
-      setShowBack("");
-    } else {
-      setShowTheme("hidden");
-      setShowBack("hidden");
-      setShowTyper("");
-    }
+    setShowTheme("");
+    setShowTyper("hidden");
+    setShowBack("");
   };
 
   const randomize = () => {
@@ -79,8 +73,16 @@ export const App = () => {
   };
 
   const showFonts = () => {
-    if (showFont === "hidden") setShowFont("");
-    else setShowFont("hidden");
+    setShowFont("");
+    setShowTyper("hidden");
+    setShowBack("");
+  };
+
+  const goBack = () => {
+    setShowTyper("");
+    setShowFont("hidden");
+    setShowTheme("hidden");
+    setShowBack("hidden");
   };
 
   return (
