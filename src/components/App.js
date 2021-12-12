@@ -93,10 +93,9 @@ export const App = () => {
           <Header>StereoTyper.io</Header>
 
           <PanelWrapper>
-            <TopButton
-              className={showBack}
-              onClick={() => goBack()}
-            >{`<`}</TopButton>
+            <TopButton className={showBack} onClick={() => goBack()}>
+              {`< back`}
+            </TopButton>
 
             <FontControl show={showFont} changeFont={setSelectedFont} />
             <ThemeControl show={showTheme} changeTheme={setSelectedTheme} />

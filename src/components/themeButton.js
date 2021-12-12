@@ -3,10 +3,11 @@ import { useTheme } from "../helpers/useTheme";
 import styled from "styled-components";
 
 const Button = styled.div`
-  padding: 15px 32px;
+  padding: 10px;
   text-align: center;
   font-size: 1.2rem;
   margin-right: 10px;
+  margin-top: 10px;
   border: 1px solid ${({ theme }) => theme.colors.text};
   border-radius: 5px;
 

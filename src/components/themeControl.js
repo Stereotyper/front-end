@@ -6,6 +6,7 @@ import { ThemeButton } from "./themeButton";
 const ThemeContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: 50ch;
 `;
 
 export const ThemeControl = ({ changeTheme, show }) => {
