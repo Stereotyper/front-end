@@ -31,6 +31,7 @@ const TopButton = styled.button`
   font-size: inherit;
   border-radius: 5px;
   padding: 10px;
+  width: 25%;
 
   &:hover {
     cursor: pointer;
@@ -105,7 +106,7 @@ export const App = () => {
             <div className={showTyper}>
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
-                <TopButton onClick={() => randomize()}>Randomize</TopButton>
+                {/* <TopButton onClick={() => randomize()}>Randomize</TopButton> */}
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
