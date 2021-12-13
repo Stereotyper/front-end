@@ -1,4 +1,4 @@
-import * as words from "./words.json";
+import * as words from "../json/words.json";
 
 const MAX_WORDS = 1000;
 

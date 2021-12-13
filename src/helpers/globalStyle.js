@@ -14,11 +14,9 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
-  .typing-panel{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .button{
+    font-family: ${({ font }) => font.name};
+    font-size: ${({ font }) => font.size};
   }
 
   body {
@@ -40,7 +38,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${({ font }) => font.name};
     font-size: ${({ font }) => font.size};
     transition: all 0.35s linear;
-
   }
 
   .current {

@@ -6,12 +6,14 @@ import { FontButton } from "./fontButton";
 const FontContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  width: 500px;
 `;
 
-export const FontControl = ({ changeFont }) => {
+export const FontControl = ({ changeFont, show }) => {
   const { fonts } = useFont();
   return (
-    <FontContainer>
+    <FontContainer className={show}>
       {Object.keys(fonts.data).map((font) => (
         <FontButton
           changeFont={changeFont}
