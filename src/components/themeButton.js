@@ -7,6 +7,7 @@ const Button = styled.div`
   text-align: center;
   font-size: 1.2rem;
   margin-right: 10px;
+  width: 25%;
   margin-top: 10px;
   border: 1px solid ${({ theme }) => theme.colors.text};
   border-radius: 5px;

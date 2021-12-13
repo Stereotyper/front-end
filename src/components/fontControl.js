@@ -6,6 +6,8 @@ import { FontButton } from "./fontButton";
 const FontContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  width: 500px;
 `;
 
 export const FontControl = ({ changeFont, show }) => {

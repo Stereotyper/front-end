@@ -9,6 +9,8 @@ import { FontControl } from "../components/fontControl";
 import { TypingPanel } from "./typingPanel";
 import { createRandomWordList } from "../helpers/wordsHelper";
 
+import { FaAngleLeft } from "react-icons/fa";
+
 const Header = styled.div`
   text-align: center;
   font-family: "Nixie One", cursive;
@@ -94,7 +96,7 @@ export const App = () => {
 
           <PanelWrapper>
             <TopButton className={showBack} onClick={() => goBack()}>
-              {`< back`}
+              <FaAngleLeft />
             </TopButton>
 
             <FontControl show={showFont} changeFont={setSelectedFont} />
