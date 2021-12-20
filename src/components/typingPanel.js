@@ -71,7 +71,6 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
     if (event.charCode == 32) {
       if (!complete) {
         // Check if word was typed correctly
-
         if (textInput == word) updateWord(currentWordIndex.current, true);
         else updateWord(currentWordIndex.current, false);
 
@@ -100,10 +99,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   const checkCorrectLetter = (charCode) => {
     let letter = String.fromCharCode(charCode);
 
-    if (letter === wordList[currentWordIndex.current][letterIndex]) {
-      console.log("correct-letter");
+    if (letter !== wordList[currentWordIndex.current][letterIndex]) {
+      focus.current.className = `typing-error`;
     } else {
-      console.log("incorrect-letter");
+      focus.current.className = `reset-error`;
     }
   };
 
@@ -152,7 +151,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
           onKeyPress={(key) => onKeyPress(key)}
           onKeyDown={(e) => {
             if (e.key === "Backspace") {
-              if (letterIndex != 0) setLetterIndex(letterIndex - 1);
+              if (letterIndex != 0) {
+                setLetterIndex(letterIndex - 1);
+                focus.current.className = `reset-error`;
+              }
             }
           }}
           onChange={handleChange}

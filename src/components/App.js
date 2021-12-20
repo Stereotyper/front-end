@@ -59,7 +59,7 @@ export const App = () => {
   useEffect(() => {
     setSelectedFont(font);
     setSelectedTheme(theme);
-  }, [themeLoaded, fontLoaded]);
+  }, [themeLoaded, fontLoaded, theme]);
 
   const updateList = () => {
     setList(createRandomWordList(NUM_WORDS));
