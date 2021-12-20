@@ -56,6 +56,7 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   const [complete, setComplete] = useState(false);
   const [word, setWord] = useState(list[0]);
   const wordRef = useRef(list[0]);
+  const [letterIndex, setLetterIndex] = useState(0);
 
   const focus = useRef();
 
@@ -66,7 +67,7 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
     wordRef.current.children[currentWordIndex.current].className = `current`;
   }, [list, wordRef, currentWordIndex]);
 
-  const onSpacePress = (event) => {
+  const onKeyPress = (event) => {
     if (event.charCode == 32) {
       if (!complete) {
         // Check if word was typed correctly
@@ -79,15 +80,30 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
 
         if (currentWordIndex.current == NUM_WORDS) {
           setComplete(true);
+          setLetterIndex(0);
         }
 
         if (currentWordIndex.current < NUM_WORDS) {
           highlightNext(currentWordIndex.current);
           setWord(wordList[currentWordIndex.current]);
+          setLetterIndex(0);
           clearText();
         }
       }
       clearText();
+    } else {
+      checkCorrectLetter(event.charCode);
+      setLetterIndex(letterIndex + 1);
+    }
+  };
+
+  const checkCorrectLetter = (charCode) => {
+    let letter = String.fromCharCode(charCode);
+
+    if (letter === wordList[currentWordIndex.current][letterIndex]) {
+      console.log("correct-letter");
+    } else {
+      console.log("incorrect-letter");
     }
   };
 
@@ -133,7 +149,12 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
         <TextInput
           type="text"
           value={textInput.trim()}
-          onKeyPress={(key) => onSpacePress(key)}
+          onKeyPress={(key) => onKeyPress(key)}
+          onKeyDown={(e) => {
+            if (e.key === "Backspace") {
+              if (letterIndex != 0) setLetterIndex(letterIndex - 1);
+            }
+          }}
           onChange={handleChange}
           ref={focus}
           autoFocus
