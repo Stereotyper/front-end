@@ -57,6 +57,7 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   const [word, setWord] = useState(list[0]);
   const wordRef = useRef(list[0]);
   const [letterIndex, setLetterIndex] = useState(0);
+  const errorCount = useRef(0);
 
   const focus = useRef();
 
@@ -80,12 +81,14 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
         if (currentWordIndex.current == NUM_WORDS) {
           setComplete(true);
           setLetterIndex(0);
+          errorCount.current = 0;
         }
 
         if (currentWordIndex.current < NUM_WORDS) {
           highlightNext(currentWordIndex.current);
           setWord(wordList[currentWordIndex.current]);
           setLetterIndex(0);
+          errorCount.current = 0;
           clearText();
         }
       }
@@ -100,9 +103,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
     let letter = String.fromCharCode(charCode);
 
     if (letter !== wordList[currentWordIndex.current][letterIndex]) {
+      errorCount.current += 1;
+      console.log(`${errorCount.current} errorCount after Error`);
+
       focus.current.className = `typing-error`;
-    } else {
-      focus.current.className = `reset-error`;
     }
   };
 
@@ -153,8 +157,15 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
             if (e.key === "Backspace") {
               if (letterIndex != 0) {
                 setLetterIndex(letterIndex - 1);
-                focus.current.className = `reset-error`;
               }
+
+              if (errorCount.current != 0) {
+                errorCount.current -= 1;
+                console.log(`${errorCount.current} errorCount after delete`);
+              }
+
+              if (errorCount.current === 0)
+                focus.current.className = `reset-error`;
             }
           }}
           onChange={handleChange}
