@@ -48,7 +48,7 @@ const ResetButton = styled.button`
   }
 `;
 
-export const TypingPanel = ({ numWords, list, onReset }) => {
+export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
   const [wordList, setWordList] = useState(list);
   const NUM_WORDS = numWords;
   const [textInput, setTextInput] = useState("");
@@ -58,6 +58,8 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   const wordRef = useRef(list[0]);
   const [letterIndex, setLetterIndex] = useState(0);
   const errorCount = useRef(0);
+  const [started, setStarted] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
   const focus = useRef();
 
@@ -67,6 +69,29 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
 
     wordRef.current.children[currentWordIndex.current].className = `current`;
   }, [list, wordRef, currentWordIndex]);
+
+  useEffect(() => {
+    let interval = null;
+    if (started) {
+      interval = setInterval(() => {
+        setSeconds((seconds) => seconds + 1);
+      }, 1000);
+    } else if (!started && seconds != 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [started, seconds]);
+
+  const startGame = () => {
+    setStarted(!started);
+  };
+
+  const startTimer = () => {};
+
+  const resetGame = () => {
+    setSeconds(0);
+    setStarted(false);
+  };
 
   const onKeyPress = (event) => {
     if (event.charCode == 32) {
@@ -82,6 +107,7 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
           setComplete(true);
           setLetterIndex(0);
           errorCount.current = 0;
+          resetGame();
         }
 
         if (currentWordIndex.current < NUM_WORDS) {
@@ -90,10 +116,12 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
           setLetterIndex(0);
           errorCount.current = 0;
           clearText();
+          calculateWPM(currentWordIndex, seconds);
         }
       }
       clearText();
     } else {
+      startGame();
       checkCorrectLetter(event.charCode);
       setLetterIndex(letterIndex + 1);
     }
@@ -140,6 +168,9 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
     onReset();
   };
 
+  // const calculateWPM = () => {
+  //   console.log("test");
+  // };
   return (
     <Panel className="typing-panel">
       <TextDisplay ref={wordRef}>

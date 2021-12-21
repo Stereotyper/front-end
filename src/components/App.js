@@ -39,7 +39,7 @@ const TopButton = styled.button`
 `;
 
 const WPM = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
 `;
 
 const TopButtonsWrapper = styled.div`
@@ -93,6 +93,12 @@ export const App = () => {
     setShowBack("hidden");
   };
 
+  const updateWPM = (word, seconds) => {
+    console.log(`wordIndex: ${word} - seconds: ${seconds}`);
+    // console.log(wpm);
+    setWPM(wpm);
+  };
+
   return (
     <div className="app">
       {themeLoaded && fontLoaded && (
@@ -111,7 +117,7 @@ export const App = () => {
             <div className={showTyper}>
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
-                <WPM>{`WPM: ${wpm == 0 ? "?" : "23"}`}</WPM>
+                <WPM>WPM: {wpm == 0 ? "?" : wpm}</WPM>
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
@@ -119,7 +125,7 @@ export const App = () => {
                 onReset={updateList}
                 numWords={NUM_WORDS}
                 list={list}
-                font={selectedFont}
+                calculateWPM={updateWPM}
               />
             </div>
           </PanelWrapper>
