@@ -38,10 +38,14 @@ const TopButton = styled.button`
   }
 `;
 
+const WPM = styled.p`
+  font-size: 2rem;
+`;
+
 const TopButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  align-items: center;
 `;
 
 export const App = () => {
@@ -51,6 +55,7 @@ export const App = () => {
   const { font, fontLoaded } = useFont();
   const [selectedFont, setSelectedFont] = useState(font);
   const [list, setList] = useState(createRandomWordList(NUM_WORDS));
+  const [wpm, setWPM] = useState(0);
 
   const [showTheme, setShowTheme] = useState("hidden");
   const [showFont, setShowFont] = useState("hidden");
@@ -106,7 +111,7 @@ export const App = () => {
             <div className={showTyper}>
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
-                {/* <TopButton onClick={() => randomize()}>Randomize</TopButton> */}
+                <WPM>{`WPM: ${wpm == 0 ? "?" : "23"}`}</WPM>
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
