@@ -70,18 +70,6 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
     wordRef.current.children[currentWordIndex.current].className = `current`;
   }, [list, wordRef, currentWordIndex]);
 
-  useEffect(() => {
-    let interval = null;
-    if (started) {
-      interval = setInterval(() => {
-        setSeconds((seconds) => seconds + 1);
-      }, 1000);
-    } else if (!started && seconds != 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [started, seconds]);
-
   const startGame = () => {
     setStarted(!started);
   };
@@ -116,11 +104,12 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
           setLetterIndex(0);
           errorCount.current = 0;
           clearText();
+
           calculateWPM(currentWordIndex, seconds);
         }
       }
       clearText();
-    } else {
+    } else if (event.charCode != 13) {
       startGame();
       checkCorrectLetter(event.charCode);
       setLetterIndex(letterIndex + 1);
@@ -171,6 +160,7 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
   // const calculateWPM = () => {
   //   console.log("test");
   // };
+
   return (
     <Panel className="typing-panel">
       <TextDisplay ref={wordRef}>
@@ -192,7 +182,6 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
 
               if (errorCount.current != 0) {
                 errorCount.current -= 1;
-                console.log(`${errorCount.current} errorCount after delete`);
               }
 
               if (errorCount.current === 0)
