@@ -121,7 +121,6 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
 
     if (letter !== wordList[currentWordIndex.current][letterIndex]) {
       errorCount.current += 1;
-      console.log(`${errorCount.current} errorCount after Error`);
 
       focus.current.className = `typing-error`;
     }
@@ -156,10 +155,6 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
     clearText();
     onReset();
   };
-
-  // const calculateWPM = () => {
-  //   console.log("test");
-  // };
 
   return (
     <Panel className="typing-panel">

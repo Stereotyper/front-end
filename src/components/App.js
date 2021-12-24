@@ -76,10 +76,6 @@ export const App = () => {
     setShowBack("");
   };
 
-  const randomize = () => {
-    console.log("randomize");
-  };
-
   const showFonts = () => {
     setShowFont("");
     setShowTyper("hidden");
@@ -94,8 +90,6 @@ export const App = () => {
   };
 
   const updateWPM = (word, seconds) => {
-    console.log(`wordIndex: ${word} - seconds: ${seconds}`);
-    // console.log(wpm);
     setWPM(wpm);
   };
 
