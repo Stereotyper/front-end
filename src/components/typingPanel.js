@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTime } from "../helpers/useTime";
 import styled from "styled-components";
 
 const Panel = styled.div`
@@ -63,6 +64,8 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
 
   const focus = useRef();
 
+  const now = useTime(1000);
+
   useEffect(() => {
     setWordList(list);
     setWord(list[0]);
@@ -71,10 +74,9 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
   }, [list, wordRef, currentWordIndex]);
 
   const startGame = () => {
-    setStarted(!started);
+    setSeconds(now);
+    setStarted(true);
   };
-
-  const startTimer = () => {};
 
   const resetGame = () => {
     setSeconds(0);
@@ -94,6 +96,8 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
         currentWordIndex.current += 1;
 
         if (currentWordIndex.current == NUM_WORDS) {
+          calculateWPM(Math.floor((now - seconds) / 1000));
+
           setComplete(true);
           setLetterIndex(0);
           errorCount.current = 0;
@@ -106,13 +110,11 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
           setLetterIndex(0);
           errorCount.current = 0;
           clearText();
-
-          calculateWPM(currentWordIndex, seconds);
         }
       }
       clearText();
     } else if (event.charCode != 13) {
-      startGame();
+      if (!started) startGame();
       checkCorrectLetter(event.charCode);
       setLetterIndex(letterIndex + 1);
     }
@@ -195,6 +197,7 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
         />
         <ResetButton onClick={() => handleClick()}>reset</ResetButton>
       </TextInputWrapper>
+      <p>{now}</p>
     </Panel>
   );
 };

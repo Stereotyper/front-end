@@ -10,7 +10,6 @@ import { TypingPanel } from "./typingPanel";
 import { createRandomWordList } from "../helpers/wordsHelper";
 
 import { FaAngleLeft } from "react-icons/fa";
-import { useTime } from "../helpers/useTime";
 
 const Header = styled.div`
   text-align: center;
@@ -50,7 +49,7 @@ const TopButtonsWrapper = styled.div`
 `;
 
 export const App = () => {
-  const NUM_WORDS = 45;
+  const NUM_WORDS = 10;
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
@@ -63,12 +62,7 @@ export const App = () => {
   const [showTyper, setShowTyper] = useState("");
   const [showBack, setShowBack] = useState("hidden");
 
-  const now = useTime(1000);
-
-  const diff = new Date().getTime() - now;
-
   useEffect(() => {
-    console.log(now);
     setSelectedFont(font);
     setSelectedTheme(theme);
   }, [themeLoaded, fontLoaded, theme]);
@@ -96,8 +90,8 @@ export const App = () => {
     setShowBack("hidden");
   };
 
-  const updateWPM = (word, seconds) => {
-    setWPM(wpm);
+  const updateWPM = (seconds) => {
+    setWPM(Math.floor((NUM_WORDS / seconds) * 60));
   };
 
   return (
@@ -119,7 +113,6 @@ export const App = () => {
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
                 <WPM>WPM: {wpm == 0 ? "?" : wpm}</WPM>
-                <p>time: ${diff}</p>
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
