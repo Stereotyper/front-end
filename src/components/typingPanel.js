@@ -83,6 +83,8 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
 
   const onKeyPress = (event) => {
     if (event.charCode == 32) {
+      focus.current.className = `reset-error`;
+
       if (!complete) {
         // Check if word was typed correctly
         if (textInput == word) updateWord(currentWordIndex.current, true);
@@ -137,6 +139,10 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
   };
 
   const handleChange = (event) => {
+    if (!event.target.value) {
+      focus.current.className = `reset-error`;
+    }
+
     if (event.charCode == 32) clearText();
     setTextInput(event.target.value);
   };
