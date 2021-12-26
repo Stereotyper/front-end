@@ -84,39 +84,41 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
   };
 
   const onKeyPress = (event) => {
-    if (event.charCode == 32) {
-      focus.current.className = `reset-error`;
+    if (!complete) {
+      if (event.charCode == 32) {
+        focus.current.className = `reset-error`;
 
-      if (!complete) {
-        // Check if word was typed correctly
-        if (textInput == word) updateWord(currentWordIndex.current, true);
-        else updateWord(currentWordIndex.current, false);
+        if (!complete) {
+          // Check if word was typed correctly
+          if (textInput == word) updateWord(currentWordIndex.current, true);
+          else updateWord(currentWordIndex.current, false);
 
-        // Set to next word and highlight
-        currentWordIndex.current += 1;
+          // Set to next word and highlight
+          currentWordIndex.current += 1;
 
-        if (currentWordIndex.current == NUM_WORDS) {
-          calculateWPM(Math.floor((now - seconds) / 1000));
+          if (currentWordIndex.current == NUM_WORDS) {
+            calculateWPM(Math.floor((now - seconds) / 1000));
 
-          setComplete(true);
-          setLetterIndex(0);
-          errorCount.current = 0;
-          resetGame();
+            setComplete(true);
+            setLetterIndex(0);
+            errorCount.current = 0;
+            resetGame();
+          }
+
+          if (currentWordIndex.current < NUM_WORDS) {
+            highlightNext(currentWordIndex.current);
+            setWord(wordList[currentWordIndex.current]);
+            setLetterIndex(0);
+            errorCount.current = 0;
+            clearText();
+          }
         }
-
-        if (currentWordIndex.current < NUM_WORDS) {
-          highlightNext(currentWordIndex.current);
-          setWord(wordList[currentWordIndex.current]);
-          setLetterIndex(0);
-          errorCount.current = 0;
-          clearText();
-        }
+        clearText();
+      } else if (event.charCode != 13) {
+        if (!started) startGame();
+        checkCorrectLetter(event.charCode);
+        setLetterIndex(letterIndex + 1);
       }
-      clearText();
-    } else if (event.charCode != 13) {
-      if (!started) startGame();
-      checkCorrectLetter(event.charCode);
-      setLetterIndex(letterIndex + 1);
     }
   };
 
@@ -193,11 +195,11 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
           }}
           onChange={handleChange}
           ref={focus}
+          // disabled={complete === true ? true : false}
           autoFocus
         />
         <ResetButton onClick={() => handleClick()}>reset</ResetButton>
       </TextInputWrapper>
-      <p>{now}</p>
     </Panel>
   );
 };
