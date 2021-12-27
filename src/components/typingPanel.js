@@ -97,7 +97,7 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
           currentWordIndex.current += 1;
 
           if (currentWordIndex.current == NUM_WORDS) {
-            calculateWPM(Math.floor((now - seconds) / 1000));
+            calculateWPM((now - seconds) / 1000);
 
             setComplete(true);
             setLetterIndex(0);
@@ -195,7 +195,6 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
           }}
           onChange={handleChange}
           ref={focus}
-          // disabled={complete === true ? true : false}
           autoFocus
         />
         <ResetButton onClick={() => handleClick()}>reset</ResetButton>

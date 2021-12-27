@@ -91,7 +91,7 @@ export const App = () => {
   };
 
   const updateWPM = (seconds) => {
-    setWPM(Math.floor((NUM_WORDS / seconds) * 60));
+    setWPM(((NUM_WORDS / seconds) * 60).toFixed(2));
   };
 
   return (
