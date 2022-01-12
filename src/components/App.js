@@ -39,7 +39,11 @@ const TopButton = styled.button`
 `;
 
 const WPM = styled.p`
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+`;
+
+const Mistakes = styled.p`
+  font-size: 1.4rem;
 `;
 
 const TopButtonsWrapper = styled.div`
@@ -49,13 +53,14 @@ const TopButtonsWrapper = styled.div`
 `;
 
 export const App = () => {
-  const NUM_WORDS = 50;
+  const NUM_WORDS = 10;
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
   const [selectedFont, setSelectedFont] = useState(font);
   const [list, setList] = useState(createRandomWordList(NUM_WORDS));
-  const [wpm, setWPM] = useState(0);
+  const [wpm, setWPM] = useState("");
+  const [mistakes, setMistakes] = useState();
 
   const [showTheme, setShowTheme] = useState("hidden");
   const [showFont, setShowFont] = useState("hidden");
@@ -112,7 +117,8 @@ export const App = () => {
             <div className={showTyper}>
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
-                <WPM>WPM: {wpm == 0 ? "?" : wpm}</WPM>
+                <WPM>WPM: {wpm == 0 ? "-" : wpm}</WPM>
+                <Mistakes>Errors: {mistakes !== "" ? "-" : mistakes}</Mistakes>
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
