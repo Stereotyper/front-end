@@ -49,7 +49,13 @@ const ResetButton = styled.button`
   }
 `;
 
-export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
+export const TypingPanel = ({
+  numWords,
+  list,
+  onReset,
+  calculateWPM,
+  calculateMistakes,
+}) => {
   const [wordList, setWordList] = useState(list);
   const NUM_WORDS = numWords;
   const [textInput, setTextInput] = useState("");
@@ -96,6 +102,7 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
           // Set to next word and highlight
           currentWordIndex.current += 1;
 
+          // End Game
           if (currentWordIndex.current == NUM_WORDS) {
             calculateWPM((now - seconds) / 1000);
 
@@ -135,7 +142,10 @@ export const TypingPanel = ({ numWords, list, onReset, calculateWPM }) => {
   const updateWord = (current, status) => {
     // incorrect/correct highlighting after space event
     if (status) wordRef.current.children[current].className = `correct`;
-    else wordRef.current.children[current].className = `incorrect`;
+    else {
+      wordRef.current.children[current].className = `incorrect`;
+      calculateMistakes(1);
+    }
   };
 
   const highlightNext = (index) => {

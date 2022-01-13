@@ -60,7 +60,7 @@ export const App = () => {
   const [selectedFont, setSelectedFont] = useState(font);
   const [list, setList] = useState(createRandomWordList(NUM_WORDS));
   const [wpm, setWPM] = useState("");
-  const [mistakes, setMistakes] = useState();
+  const [mistakes, setMistakes] = useState(0);
 
   const [showTheme, setShowTheme] = useState("hidden");
   const [showFont, setShowFont] = useState("hidden");
@@ -74,6 +74,8 @@ export const App = () => {
 
   const updateList = () => {
     setList(createRandomWordList(NUM_WORDS));
+    setWPM(0);
+    setMistakes(0);
   };
 
   const showThemes = () => {
@@ -99,6 +101,10 @@ export const App = () => {
     setWPM(((NUM_WORDS / seconds) * 60).toFixed(2));
   };
 
+  const updateMistakes = (count) => {
+    setMistakes(mistakes + count);
+  };
+
   return (
     <div className="app">
       {themeLoaded && fontLoaded && (
@@ -118,7 +124,7 @@ export const App = () => {
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
                 <WPM>WPM: {wpm == 0 ? "-" : wpm}</WPM>
-                <Mistakes>Errors: {mistakes !== "" ? "-" : mistakes}</Mistakes>
+                <Mistakes>Errors: {mistakes == 0 ? "0" : mistakes}</Mistakes>
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
@@ -127,6 +133,7 @@ export const App = () => {
                 numWords={NUM_WORDS}
                 list={list}
                 calculateWPM={updateWPM}
+                calculateMistakes={updateMistakes}
               />
             </div>
           </PanelWrapper>
