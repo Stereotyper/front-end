@@ -55,6 +55,7 @@ export const TypingPanel = ({
   onReset,
   calculateWPM,
   calculateMistakes,
+  calculateAccuracy,
 }) => {
   const [wordList, setWordList] = useState(list);
   const NUM_WORDS = numWords;
@@ -67,6 +68,7 @@ export const TypingPanel = ({
   const errorCount = useRef(0);
   const [started, setStarted] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const incorrectLetters = useRef(0);
 
   const focus = useRef();
 
@@ -97,17 +99,20 @@ export const TypingPanel = ({
         if (!complete) {
           // Check if word was typed correctly
           if (textInput == word) updateWord(currentWordIndex.current, true);
-          else updateWord(currentWordIndex.current, false);
+          else {
+            updateWord(currentWordIndex.current, false);
+          }
 
-          // Set to next word and highlight
+          calculateIncorrectLetters(textInput, word);
+
           currentWordIndex.current += 1;
 
-          // End Game
+          // End of List
           if (currentWordIndex.current == NUM_WORDS) {
             calculateWPM((now - seconds) / 1000);
-
             setComplete(true);
             setLetterIndex(0);
+            calculateAccuracy(incorrectLetters.current);
             errorCount.current = 0;
             resetGame();
           }
@@ -127,6 +132,15 @@ export const TypingPanel = ({
         setLetterIndex(letterIndex + 1);
       }
     }
+  };
+
+  const calculateIncorrectLetters = (input, actual) => {
+    let count = 0;
+    for (let i = 0; i < word.length; i++) {
+      if (textInput[i] != word[i]) count++;
+    }
+
+    incorrectLetters.current += count;
   };
 
   const checkCorrectLetter = (charCode) => {
