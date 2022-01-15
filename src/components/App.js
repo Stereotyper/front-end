@@ -50,6 +50,13 @@ const TopButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+`;
+
+const BottomWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const App = () => {
@@ -134,11 +141,7 @@ export const App = () => {
             <div className={showTyper}>
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
-                <WPM>WPM: {wpm == 0 ? "-" : wpm}</WPM>
-                <Mistakes>
-                  Errors: {incorrectWords == 0 ? "0" : incorrectWords}
-                </Mistakes>
-                <Mistakes>Acc: {accuracy == 0 ? "0" : accuracy}</Mistakes>
+
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
@@ -150,6 +153,13 @@ export const App = () => {
                 calculateMistakes={updateMistakes}
                 calculateAccuracy={updateAccuracy}
               />
+              <BottomWrapper>
+                <WPM>WPM: {wpm == 0 ? "-" : wpm}</WPM>
+                <Mistakes>
+                  Errors: {incorrectWords == 0 ? "0" : incorrectWords}
+                </Mistakes>
+                <Mistakes>Acc: {accuracy == 0 ? "0" : accuracy}</Mistakes>
+              </BottomWrapper>
             </div>
           </PanelWrapper>
         </ThemeProvider>
