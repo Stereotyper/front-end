@@ -83,7 +83,8 @@ export const App = () => {
   const updateList = () => {
     setList(createRandomWordList(NUM_WORDS));
     setWPM(0);
-    // setMistakes(0);
+    setIncorrectWords(0);
+    setAccuracy(0);
   };
 
   const showThemes = () => {
