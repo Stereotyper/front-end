@@ -1,14 +1,11 @@
+import { Link } from "gatsby";
 import * as React from "react";
-
-// styles
-const pageStyles = {
-  //   color: "#232129",
-};
 
 const NotFoundPage = () => {
   return (
-    <main style={pageStyles}>
+    <main>
       <title>Not Found</title>
+      <Link to="/"> Go Back</Link>
     </main>
   );
 };

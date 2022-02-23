@@ -38,41 +38,59 @@ const TopButton = styled.button`
   }
 `;
 
+const WPM = styled.p`
+  font-size: 1.4rem;
+`;
+
+const Mistakes = styled.p`
+  font-size: 1.4rem;
+`;
+
 const TopButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 `;
 
+const BottomWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const App = () => {
-  const NUM_WORDS = 45;
+  const NUM_WORDS = 10;
   const { theme, themeLoaded } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const { font, fontLoaded } = useFont();
   const [selectedFont, setSelectedFont] = useState(font);
   const [list, setList] = useState(createRandomWordList(NUM_WORDS));
+  const [wpm, setWPM] = useState("");
+  const [incorrectWords, setIncorrectWords] = useState(0);
+  const [accuracy, setAccuracy] = useState(0);
 
   const [showTheme, setShowTheme] = useState("hidden");
   const [showFont, setShowFont] = useState("hidden");
   const [showTyper, setShowTyper] = useState("");
   const [showBack, setShowBack] = useState("hidden");
+
   useEffect(() => {
     setSelectedFont(font);
     setSelectedTheme(theme);
-  }, [themeLoaded, fontLoaded]);
+  }, [themeLoaded, fontLoaded, theme]);
 
   const updateList = () => {
     setList(createRandomWordList(NUM_WORDS));
+    setWPM(0);
+    setIncorrectWords(0);
+    setAccuracy(0);
   };
 
   const showThemes = () => {
     setShowTheme("");
     setShowTyper("hidden");
     setShowBack("");
-  };
-
-  const randomize = () => {
-    console.log("randomize");
   };
 
   const showFonts = () => {
@@ -86,6 +104,24 @@ export const App = () => {
     setShowFont("hidden");
     setShowTheme("hidden");
     setShowBack("hidden");
+  };
+
+  const updateWPM = (seconds) => {
+    setWPM(((NUM_WORDS / seconds) * 60).toFixed(2));
+  };
+
+  const updateMistakes = (count) => {
+    setIncorrectWords(incorrectWords + count);
+  };
+
+  const updateAccuracy = (errors) => {
+    let count = 0;
+
+    for (let i = 0; i < NUM_WORDS; i++) {
+      count += list[i].length;
+    }
+
+    setAccuracy((((count - errors) / count) * 100).toFixed(2));
   };
 
   return (
@@ -106,7 +142,7 @@ export const App = () => {
             <div className={showTyper}>
               <TopButtonsWrapper>
                 <TopButton onClick={() => showThemes()}>Theme</TopButton>
-                {/* <TopButton onClick={() => randomize()}>Randomize</TopButton> */}
+
                 <TopButton onClick={() => showFonts()}>Font</TopButton>
               </TopButtonsWrapper>
 
@@ -114,8 +150,17 @@ export const App = () => {
                 onReset={updateList}
                 numWords={NUM_WORDS}
                 list={list}
-                font={selectedFont}
+                calculateWPM={updateWPM}
+                calculateMistakes={updateMistakes}
+                calculateAccuracy={updateAccuracy}
               />
+              <BottomWrapper>
+                <WPM>WPM: {wpm == 0 ? "-" : wpm}</WPM>
+                <Mistakes>
+                  Errors: {incorrectWords == 0 ? "0" : incorrectWords}
+                </Mistakes>
+                <Mistakes>Acc: {accuracy == 0 ? "0" : accuracy}</Mistakes>
+              </BottomWrapper>
             </div>
           </PanelWrapper>
         </ThemeProvider>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTime } from "../helpers/useTime";
 import styled from "styled-components";
 
 const Panel = styled.div`
@@ -48,7 +49,14 @@ const ResetButton = styled.button`
   }
 `;
 
-export const TypingPanel = ({ numWords, list, onReset }) => {
+export const TypingPanel = ({
+  numWords,
+  list,
+  onReset,
+  calculateWPM,
+  calculateMistakes,
+  calculateAccuracy,
+}) => {
   const [wordList, setWordList] = useState(list);
   const NUM_WORDS = numWords;
   const [textInput, setTextInput] = useState("");
@@ -56,8 +64,15 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   const [complete, setComplete] = useState(false);
   const [word, setWord] = useState(list[0]);
   const wordRef = useRef(list[0]);
+  const [letterIndex, setLetterIndex] = useState(0);
+  const errorCount = useRef(0);
+  const [started, setStarted] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const incorrectLetters = useRef(0);
 
   const focus = useRef();
+
+  const now = useTime(1000);
 
   useEffect(() => {
     setWordList(list);
@@ -66,35 +81,85 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
     wordRef.current.children[currentWordIndex.current].className = `current`;
   }, [list, wordRef, currentWordIndex]);
 
-  const onSpacePress = (event) => {
-    if (event.charCode == 32) {
-      if (!complete) {
-        // Check if word was typed correctly
+  const startGame = () => {
+    setSeconds(now);
+    setStarted(true);
+  };
 
-        if (textInput == word) updateWord(currentWordIndex.current, true);
-        else updateWord(currentWordIndex.current, false);
+  const resetGame = () => {
+    setSeconds(0);
+    setStarted(false);
+  };
 
-        // Set to next word and highlight
-        currentWordIndex.current += 1;
+  const onKeyPress = (event) => {
+    if (!complete) {
+      if (event.charCode == 32) {
+        focus.current.className = `reset-error`;
 
-        if (currentWordIndex.current == NUM_WORDS) {
-          setComplete(true);
+        if (!complete) {
+          // Check if word was typed correctly
+          if (textInput == word) updateWord(currentWordIndex.current, true);
+          else {
+            updateWord(currentWordIndex.current, false);
+          }
+
+          calculateIncorrectLetters(textInput, word);
+
+          currentWordIndex.current += 1;
+
+          // End of List
+          if (currentWordIndex.current == NUM_WORDS) {
+            calculateWPM((now - seconds) / 1000);
+            setComplete(true);
+            setLetterIndex(0);
+            calculateAccuracy(incorrectLetters.current);
+            errorCount.current = 0;
+            resetGame();
+          }
+
+          if (currentWordIndex.current < NUM_WORDS) {
+            highlightNext(currentWordIndex.current);
+            setWord(wordList[currentWordIndex.current]);
+            setLetterIndex(0);
+            errorCount.current = 0;
+            clearText();
+          }
         }
-
-        if (currentWordIndex.current < NUM_WORDS) {
-          highlightNext(currentWordIndex.current);
-          setWord(wordList[currentWordIndex.current]);
-          clearText();
-        }
+        clearText();
+      } else if (event.charCode != 13) {
+        if (!started) startGame();
+        checkCorrectLetter(event.charCode);
+        setLetterIndex(letterIndex + 1);
       }
-      clearText();
+    }
+  };
+
+  const calculateIncorrectLetters = (input, actual) => {
+    let count = 0;
+    for (let i = 0; i < word.length; i++) {
+      if (textInput[i] != word[i]) count++;
+    }
+
+    incorrectLetters.current += count;
+  };
+
+  const checkCorrectLetter = (charCode) => {
+    let letter = String.fromCharCode(charCode);
+
+    if (letter !== wordList[currentWordIndex.current][letterIndex]) {
+      errorCount.current += 1;
+
+      focus.current.className = `typing-error`;
     }
   };
 
   const updateWord = (current, status) => {
     // incorrect/correct highlighting after space event
     if (status) wordRef.current.children[current].className = `correct`;
-    else wordRef.current.children[current].className = `incorrect`;
+    else {
+      wordRef.current.children[current].className = `incorrect`;
+      calculateMistakes(1);
+    }
   };
 
   const highlightNext = (index) => {
@@ -102,6 +167,10 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
   };
 
   const handleChange = (event) => {
+    if (!event.target.value) {
+      focus.current.className = `reset-error`;
+    }
+
     if (event.charCode == 32) clearText();
     setTextInput(event.target.value);
   };
@@ -133,7 +202,21 @@ export const TypingPanel = ({ numWords, list, onReset }) => {
         <TextInput
           type="text"
           value={textInput.trim()}
-          onKeyPress={(key) => onSpacePress(key)}
+          onKeyPress={(key) => onKeyPress(key)}
+          onKeyDown={(e) => {
+            if (e.key === "Backspace") {
+              if (letterIndex != 0) {
+                setLetterIndex(letterIndex - 1);
+              }
+
+              if (errorCount.current != 0) {
+                errorCount.current -= 1;
+              }
+
+              if (errorCount.current === 0)
+                focus.current.className = `reset-error`;
+            }
+          }}
           onChange={handleChange}
           ref={focus}
           autoFocus
